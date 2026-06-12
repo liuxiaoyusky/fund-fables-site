@@ -4,10 +4,16 @@
 
 ## 在线访问
 
-部署到 GitHub Pages 后，访问地址：
+自定义域名：
 
 ```
-https://liuxiaoyusky.github.io/fund.fables.part2
+https://fables.skyliu.tech
+```
+
+GitHub Pages 默认地址：
+
+```
+https://liuxiaoyusky.github.io/fund-fables-site
 ```
 
 ## 本地预览
@@ -36,7 +42,10 @@ mkdocs serve
 1. 在 GitHub 新建仓库 `fund-fables-site`。
 2. 把本目录推送到该仓库的 `main` 分支。
 3. 进入仓库 `Settings → Pages`，确保 Source 为 "GitHub Actions"。
-4. 每次推送到 `main` 都会自动构建并部署。
+4. 在 **Custom domain** 填入 `fables.skyliu.tech` 并保存。
+5. 在域名 DNS 中添加 CNAME 记录：`fables` → `liuxiaoyusky.github.io`。
+6. 等待 GitHub 验证 DNS 并启用 HTTPS（通常几分钟到几小时）。
+7. 每次推送到 `main` 都会自动构建并部署。
 
 ## 自定义
 
