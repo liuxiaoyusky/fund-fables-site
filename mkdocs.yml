@@ -1,7 +1,7 @@
 site_name: 基金从业 · 科目二寓言故事
-site_url: https://your-username.github.io/fund-fables-site
-repo_url: https://github.com/your-username/fund-fables-site
-repo_name: fund-fables-site
+site_url: https://liuxiaoyusky.github.io/fund.fables.part2
+repo_url: https://github.com/liuxiaoyusky/fund.fables.part2
+repo_name: fund.fables.part2
 copyright: Copyright &copy; 2026
 
 theme:
@@ -52,7 +52,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/your-username/fund-fables-site
+      link: https://github.com/liuxiaoyusky/fund.fables.part2
 
 extra_css:
   - stylesheets/extra.css

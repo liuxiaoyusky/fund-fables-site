@@ -7,7 +7,7 @@
 部署到 GitHub Pages 后，访问地址：
 
 ```
-https://<your-username>.github.io/fund-fables-site
+https://liuxiaoyusky.github.io/fund.fables.part2
 ```
 
 ## 本地预览
