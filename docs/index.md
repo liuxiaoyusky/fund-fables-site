@@ -1,46 +1,46 @@
-# 基金从业 · 科目二寓言故事
-
-用生动的寓言故事，把《证券投资基金基础知识》里的概念串起来。
-
-## 这是什么？
-
-这个站点把科目二教材里的知识点改写成了**有情节、有人物、有冲突**的寓言故事。每个故事最后都会回到**原文概念和定义**，方便你在理解之后对照记忆。
-
-适合：
-
-- 备考基金从业资格考试，想降低记忆负担的同学
-- 学完概念后，想用故事再梳理一遍逻辑的人
-- 想快速浏览某章重点、换个角度理解的人
-
-## 内容覆盖
-
-目前内容按教材章节组织，涵盖：
-
-- 证券投资基金概述
-- 基金的类型
-- 投资管理基础
-- 权益投资
-- 固定收益投资
-- 衍生工具
-- 另类投资
-- 投资管理流程
-- 投资组合管理
-- 投资交易管理
-- 投资风险管理
-- 基金业绩评价
-- ……（持续补充中）
-
-## 怎么用
-
-1. 左侧目录按章节展开，找到你想看的主题。
-2. 点击任意一篇寓言即可阅读。
-3. 每篇末尾都附有对应的原概念/定义，便于复习对照。
-4. 顶部搜索框可以直接搜索关键词。
-
-## 来源
-
-内容整理自 `04-基金从业/02-科目二-证券投资基金/converted/fables/`，与主仓库的备考资料保持同步。
-
+---
+title: 寓言图书馆
+hide:
+  - navigation
+  - toc
 ---
 
-开始阅读：点击左侧目录进入任意章节。
+<div id="book-gallery" class="book-gallery" aria-label="书籍列表">
+
+  <a class="book-card" data-book-id="fund-fables"
+     data-total-fables="171"
+     href="fables/fund-fables/index.html"
+     style="--card-grad: linear-gradient(135deg, #0f766e 0%, #134e4a 50%, #042f2e 100%);">
+    <div class="book-card__cover">
+      <div class="book-card__badge" data-role="badge">尚未开始</div>
+      <div class="book-card__cover-text">
+        <p class="book-card__eyebrow">基金从业 · 科目二</p>
+        <h2 class="book-card__title">证券投资基金</h2>
+        <p class="book-card__subtitle">Securities Investment Funds</p>
+      </div>
+    </div>
+    <div class="book-card__meta">
+      <span class="book-card__progress" data-role="progress">0 / 171 篇</span>
+      <span class="book-card__hint" data-role="hint">点击开始阅读</span>
+    </div>
+  </a>
+
+  <a class="book-card" data-book-id="finite-and-infinite-games"
+     data-total-fables="101"
+     href="fables/finite-and-infinite-games/index.html"
+     style="--card-grad: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #0c0a09 100%);">
+    <div class="book-card__cover">
+      <div class="book-card__badge" data-role="badge">尚未开始</div>
+      <div class="book-card__cover-text">
+        <p class="book-card__eyebrow">James Carse · 1986</p>
+        <h2 class="book-card__title">有限与无限的游戏</h2>
+        <p class="book-card__subtitle">Finite and Infinite Games</p>
+      </div>
+    </div>
+    <div class="book-card__meta">
+      <span class="book-card__progress" data-role="progress">0 / 101 篇</span>
+      <span class="book-card__hint" data-role="hint">点击开始阅读</span>
+    </div>
+  </a>
+
+</div>
