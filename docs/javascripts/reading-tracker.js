@@ -17,23 +17,28 @@
 
   // ---- 1. Classify the URL ----
   // /fables/<bookId>/<sectionPath...>.html  ->  { bookId, sectionPath, url }
-  // Book-level index pages (one path segment after /fables/<bookId>/) are
-  // also tracked so that the cover can resume there if no fable has been
-  // opened yet.
+  // Book-level index pages are intentionally not tracked; otherwise visiting a
+  // book landing page would overwrite the last real reading position.
   function classify(pathname) {
-    var p = (pathname || '').replace(/^\//, '').replace(/\.html$/, '').replace(/\/$/, '');
+    var p = (pathname || '')
+      .replace(/^\//, '')
+      .replace(/\/index\.html$/, '')
+      .replace(/\.html$/, '')
+      .replace(/\/$/, '');
     if (!p) return null;
     var m = p.match(/^fables\/([^/]+)\/(.+)$/);
     if (!m) return null;
+    var url = (pathname || '').replace(/\/index\.html$/, '/');
     return {
       bookId: m[1],
       sectionPath: m[2],
-      url: 'fables/' + m[1] + '/' + m[2] + '.html'
+      url: url.charAt(0) === '/' ? url : '/' + url
     };
   }
 
   var info = classify(window.location.pathname);
   if (!info) return;
+  if (info.sectionPath === 'index') return;
 
   // ---- 2. Read library state ----
   var state = {};
@@ -46,6 +51,14 @@
 
   function persist() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function readSectionIndex(sectionPath) {
+    var leaf = (sectionPath || '').split('/').pop() || '';
+    var match = leaf.match(/^\d+-(\d+)$/);
+    if (!match) return null;
+    var n = parseInt(match[1], 10);
+    return isNaN(n) ? null : n;
   }
 
   // ---- 3. Scroll restoration ----
@@ -86,6 +99,8 @@
   book.lastSection = info.sectionPath;
   book.lastUrl     = info.url;
   book.lastReadAt  = Date.now();
+  var sectionIndex = readSectionIndex(info.sectionPath);
+  if (sectionIndex !== null) book.lastIndex = sectionIndex;
   state[info.bookId] = book;
   persist();
 

@@ -1,8 +1,6 @@
 site_name: 寓言图书馆
 site_description: 寓言图书馆 —— 用故事理解世界
 site_url: https://fables.skyliu.tech
-repo_url: https://github.com/liuxiaoyusky/fund-fables-site
-repo_name: fund-fables-site
 copyright: Copyright &copy; 2026
 
 theme:
@@ -34,7 +32,6 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
-    - content.action.edit
 
 plugins:
   - search
@@ -50,17 +47,13 @@ markdown_extensions:
   - toc:
       permalink: true
 
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/liuxiaoyusky/fund-fables-site
-
 extra_css:
   - stylesheets/extra.css
 
 extra_javascript:
   - javascripts/library.js
   - javascripts/reading-tracker.js
+  - javascripts/reading-tools.js
 
 nav:
   - 首页: index.md
@@ -78,12 +71,3 @@ nav:
       - 10 投资交易管理: fables/fund-fables/10-投资交易管理/01-证券市场的交易机制/01-交易机制.md
       - 11 投资风险管理: fables/fund-fables/11-投资风险管理/01-投资风险概述/01-投资风险概述与风险类型.md
       - 12 基金业绩评价: fables/fund-fables/12-基金业绩评价/01-基金业绩评价概述/01-基金业绩评价概述与目的.md
-  - 有限与无限的游戏:
-      - 概览: fables/finite-and-infinite-games/index.md
-      - 01 There Are at Least Two Kinds of Games: fables/finite-and-infinite-games/01-there-are-at-least-two-kinds-of-games/01-01.md
-      - 02 No One Can Play a Game Alone: fables/finite-and-infinite-games/02-no-one-can-play-a-game-alone/02-01.md
-      - 03 I Am the Genius of Myself: fables/finite-and-infinite-games/03-i-am-the-genius-of-myself/03-01.md
-      - 04 A Finite Game Occurs Within a World: fables/finite-and-infinite-games/04-a-finite-game-occurs-within-a-world/04-01.md
-      - 05 Nature Is the Realm of the Unspeakable: fables/finite-and-infinite-games/05-nature-is-the-realm-of-the-unspeakable/05-01.md
-      - 06 We Control Nature for Societal Reasons: fables/finite-and-infinite-games/06-we-control-nature-for-societal-reasons/06-01.md
-      - 07 Myth Provokes Explanation but Accepts None of It: fables/finite-and-infinite-games/07-myth-provokes-explanation-but-accepts-none-of-it/07-01.md
