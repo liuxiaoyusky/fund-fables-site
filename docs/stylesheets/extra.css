@@ -430,6 +430,12 @@
     linear-gradient(135deg, #10837a 0%, #073f3c 56%, #021f1d 100%);
 }
 
+.book-card--equity {
+  --card-grad:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.18), transparent 0 18%, transparent 19%),
+    linear-gradient(135deg, #1f4e6b 0%, #0c2536 56%, #04121d 100%);
+}
+
 .book-card--game {
   --card-grad:
     radial-gradient(circle at 24% 22%, rgba(223, 126, 112, 0.34), transparent 0 18%, transparent 19%),

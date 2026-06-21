@@ -18,7 +18,7 @@ hide:
     <a class="library-button library-button--ghost" href="../../">返回书架</a>
   </div>
 
-  <div class="book-home__status" data-role="book-status">共 12 章，171 篇寓言故事。</div>
+  <div class="book-home__status" data-role="book-status">共 18 章，464 篇寓言故事。</div>
 </section>
 
 <section class="book-toc" aria-labelledby="fund-fables-toc-title">
@@ -43,7 +43,7 @@ hide:
       <strong>投资管理基础</strong>
       <small>财务报表、货币时间价值、利率和常用统计概念。</small>
     </a>
-    <a class="book-toc-card" href="04-权益投资/01-资本结构/01-资本结构概述/">
+    <a class="book-toc-card" href="04-权益投资/01-资本结构/01-资本的类型/">
       <span>04</span>
       <strong>权益投资</strong>
       <small>资本结构、股票、估值方法和权益类证券分析。</small>
@@ -87,6 +87,36 @@ hide:
       <span>12</span>
       <strong>基金业绩评价</strong>
       <small>业绩评价、归因分析、风格分析、基金管理人和 GIPS。</small>
+    </a>
+    <a class="book-toc-card" href="13-基金的募集、交易与登记/01-公募基金的募集与认购/">
+      <span>13</span>
+      <strong>基金的募集、交易与登记</strong>
+      <small>公募与私募基金的募集、备案、份额登记和资金结算。</small>
+    </a>
+    <a class="book-toc-card" href="14-基金的投资交易与结算/01-基金参与证券交易所二级市场的交易与结算/">
+      <span>14</span>
+      <strong>基金的投资交易与结算</strong>
+      <small>证券交易所、银行间债券市场、其他市场和海外市场。</small>
+    </a>
+    <a class="book-toc-card" href="15-基金的估值、费用与会计核算/01-基金财务会计报告分析/">
+      <span>15</span>
+      <strong>基金的估值、费用与会计核算</strong>
+      <small>基金估值方法、费用结构和财务会计报告分析。</small>
+    </a>
+    <a class="book-toc-card" href="16-基金的利润分配与税收/01-基金税收/">
+      <span>16</span>
+      <strong>基金的利润分配与税收</strong>
+      <small>基金利润分配规则和相关税收制度。</small>
+    </a>
+    <a class="book-toc-card" href="17-基金的信息披露/01-基金信息披露概述/">
+      <span>17</span>
+      <strong>基金的信息披露</strong>
+      <small>信息披露概述、主要当事人义务和私募基金披露要求。</small>
+    </a>
+    <a class="book-toc-card" href="18-基金销售基础知识/01-基金投资者/">
+      <span>18</span>
+      <strong>基金销售基础知识</strong>
+      <small>基金投资者类型、销售机构、策略和业务规范。</small>
     </a>
   </div>
 </section>

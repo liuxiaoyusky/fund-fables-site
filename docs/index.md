@@ -17,7 +17,21 @@ hide:
       <a class="library-quick-book" data-book-id="fund-fables" href="fables/fund-fables/">
         <span>
           <strong>证券投资基金</strong>
-          <small data-role="quick-status">171 篇寓言</small>
+          <small data-role="quick-status">464 篇寓言</small>
+        </span>
+        <em data-role="quick-action">开始</em>
+      </a>
+      <a class="library-quick-book" data-book-id="private-equity-funds" href="fables/private-equity-funds/">
+        <span>
+          <strong>股权投资基金</strong>
+          <small data-role="quick-status">337 篇寓言</small>
+        </span>
+        <em data-role="quick-action">开始</em>
+      </a>
+      <a class="library-quick-book" data-book-id="finite-and-infinite-games" href="fables/finite-and-infinite-games/">
+        <span>
+          <strong>有限与无限的游戏</strong>
+          <small data-role="quick-status">101 篇寓言</small>
         </span>
         <em data-role="quick-action">开始</em>
       </a>
@@ -40,11 +54,11 @@ hide:
 
 <section class="library-stats" aria-label="图书馆统计">
   <div class="library-stat">
-    <span class="library-stat__value">171</span>
+    <span class="library-stat__value">902</span>
     <span class="library-stat__label">篇寓言故事</span>
   </div>
   <div class="library-stat">
-    <span class="library-stat__value">1</span>
+    <span class="library-stat__value">3</span>
     <span class="library-stat__label">本主题书</span>
   </div>
   <div class="library-stat">
@@ -61,7 +75,7 @@ hide:
 
   <div id="book-gallery" class="book-gallery" aria-label="书籍列表">
     <a class="book-card book-card--fund" data-book-id="fund-fables"
-       data-total-fables="171"
+       data-total-fables="464"
        href="fables/fund-fables/">
       <div class="book-card__cover">
         <div class="book-card__badge" data-role="badge">尚未开始</div>
@@ -73,12 +87,60 @@ hide:
         </div>
       </div>
       <div class="book-card__body">
-        <p>用故事串起基金分类、投资工具、风险管理和业绩评价。</p>
+        <p>用故事串起基金分类、投资工具、风险管理和业绩评价，覆盖 18 个章节。</p>
         <div class="book-card__meter" aria-hidden="true">
           <span data-role="meter"></span>
         </div>
         <div class="book-card__meta">
-          <span class="book-card__progress" data-role="progress">0 / 171 篇</span>
+          <span class="book-card__progress" data-role="progress">0 / 464 篇</span>
+          <span class="book-card__hint" data-role="hint">开始阅读</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="book-card book-card--equity" data-book-id="private-equity-funds"
+       data-total-fables="337"
+       href="fables/private-equity-funds/">
+      <div class="book-card__cover">
+        <div class="book-card__badge" data-role="badge">尚未开始</div>
+        <div class="book-card__spine" aria-hidden="true"></div>
+        <div class="book-card__cover-text">
+          <p class="book-card__eyebrow">基金从业 · 科目三</p>
+          <h2 class="book-card__title">股权投资基金</h2>
+          <p class="book-card__subtitle">Private Equity Funds</p>
+        </div>
+      </div>
+      <div class="book-card__body">
+        <p>从概念到退出，9 章 337 篇私募股权基金知识都被改写成连续的小镇故事。</p>
+        <div class="book-card__meter" aria-hidden="true">
+          <span data-role="meter"></span>
+        </div>
+        <div class="book-card__meta">
+          <span class="book-card__progress" data-role="progress">0 / 337 篇</span>
+          <span class="book-card__hint" data-role="hint">开始阅读</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="book-card book-card--game" data-book-id="finite-and-infinite-games"
+       data-total-fables="101"
+       href="fables/finite-and-infinite-games/">
+      <div class="book-card__cover">
+        <div class="book-card__badge" data-role="badge">尚未开始</div>
+        <div class="book-card__spine" aria-hidden="true"></div>
+        <div class="book-card__cover-text">
+          <p class="book-card__eyebrow">思想经典</p>
+          <h2 class="book-card__title">有限与无限的游戏</h2>
+          <p class="book-card__subtitle">Finite and Infinite Games · James Carse, 1986</p>
+        </div>
+      </div>
+      <div class="book-card__body">
+        <p>把 James Carse 的小书每一节都改写成 1952 年上海十六铺风格的寓言故事。</p>
+        <div class="book-card__meter" aria-hidden="true">
+          <span data-role="meter"></span>
+        </div>
+        <div class="book-card__meta">
+          <span class="book-card__progress" data-role="progress">0 / 101 篇</span>
           <span class="book-card__hint" data-role="hint">开始阅读</span>
         </div>
       </div>

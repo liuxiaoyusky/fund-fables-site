@@ -62,7 +62,7 @@ nav:
       - 01 证券投资基金概述: fables/fund-fables/01-证券投资基金概述/01-证券投资基金简介/01-证券投资基金概念.md
       - 02 基金的类型: fables/fund-fables/02-基金的类型/01-证券投资基金分类概述/01-分类的意义.md
       - 03 投资管理基础: fables/fund-fables/03-投资管理基础/02-财务报表分析/01-财务报表分析简介.md
-      - 04 权益投资: fables/fund-fables/04-权益投资/01-资本结构/01-资本结构概述.md
+      - 04 权益投资: fables/fund-fables/04-权益投资/01-资本结构/01-资本的类型.md
       - 05 固定收益投资: fables/fund-fables/05-固定收益投资/01-债券与债券市场/01-债券市场概述与分类.md
       - 06 衍生工具: fables/fund-fables/06-衍生工具/01-衍生工具概述/01-衍生工具的定义.md
       - 07 另类投资: fables/fund-fables/07-另类投资/01-另类投资概述/01-另类投资的概念与主要类别.md
@@ -71,3 +71,29 @@ nav:
       - 10 投资交易管理: fables/fund-fables/10-投资交易管理/01-证券市场的交易机制/01-交易机制.md
       - 11 投资风险管理: fables/fund-fables/11-投资风险管理/01-投资风险概述/01-投资风险概述与风险类型.md
       - 12 基金业绩评价: fables/fund-fables/12-基金业绩评价/01-基金业绩评价概述/01-基金业绩评价概述与目的.md
+      - 13 基金的募集、交易与登记: fables/fund-fables/13-基金的募集、交易与登记/01-公募基金的募集与认购.md
+      - 14 基金的投资交易与结算: fables/fund-fables/14-基金的投资交易与结算/01-基金参与证券交易所二级市场的交易与结算.md
+      - 15 基金的估值、费用与会计核算: fables/fund-fables/15-基金的估值、费用与会计核算/01-基金财务会计报告分析.md
+      - 16 基金的利润分配与税收: fables/fund-fables/16-基金的利润分配与税收/01-基金税收.md
+      - 17 基金的信息披露: fables/fund-fables/17-基金的信息披露/01-基金信息披露概述.md
+      - 18 基金销售基础知识: fables/fund-fables/18-基金销售基础知识/01-基金投资者.md
+  - 基金从业 · 科目三:
+      - 概览: fables/private-equity-funds/index.md
+      - 01 股权投资基金概述: fables/private-equity-funds/01-股权投资基金概述/01-股权投资基金的概念和特点/01-一、股权投资基金的概念.md
+      - 02 股权投资基金管理人: fables/private-equity-funds/02-股权投资基金管理人/01-股权投资基金管理人概述/01-一、基金管理人的概念.md
+      - 03 股权投资基金产品: fables/private-equity-funds/03-股权投资基金产品/01-股权投资基金产品概述/01-（一）基本信息.md
+      - 04 股权投资基金的募集与设立: fables/private-equity-funds/04-股权投资基金的募集与设立/01-募集与设立概述/01-（二）募集方式.md
+      - 05 股权投资基金的投资: fables/private-equity-funds/05-股权投资基金的投资/01-股权投资的一般流程/01-一、项目开发与筛选.md
+      - 06 股权投资基金的投后管理: fables/private-equity-funds/06-股权投资基金的投后管理/01-投后管理概述/01-一、投后管理的概念.md
+      - 07 股权投资基金的项目退出: fables/private-equity-funds/07-股权投资基金的项目退出/01-项目退出概述/01-一、项目退出的概念.md
+      - 08 股权投资基金治理: fables/private-equity-funds/08-股权投资基金治理/01-股权投资基金治理概述/01-一、基金治理的概念.md
+      - 09 股权投资基金的运营管理: fables/private-equity-funds/09-股权投资基金的运营管理/01-股权投资基金权益登记/01-（一）公司型股权投资基金的设立登记.md
+  - 有限与无限的游戏:
+      - 概览: fables/finite-and-infinite-games/index.md
+      - 01 There Are at Least Two Kinds of Games: fables/finite-and-infinite-games/01-there-are-at-least-two-kinds-of-games/01-01.md
+      - 02 No One Can Play a Game Alone: fables/finite-and-infinite-games/02-no-one-can-play-a-game-alone/02-01.md
+      - 03 I Am the Genius of Myself: fables/finite-and-infinite-games/03-i-am-the-genius-of-myself/03-01.md
+      - 04 A Finite Game Occurs Within a World: fables/finite-and-infinite-games/04-a-finite-game-occurs-within-a-world/04-01.md
+      - 05 Nature Is the Realm of the Unspeakable: fables/finite-and-infinite-games/05-nature-is-the-realm-of-the-unspeakable/05-01.md
+      - 06 We Control Nature for Societal Reasons: fables/finite-and-infinite-games/06-we-control-nature-for-societal-reasons/06-01.md
+      - 07 Myth Provokes Explanation but Accepts None of It: fables/finite-and-infinite-games/07-myth-provokes-explanation-but-accepts-none-of-it/07-01.md
