@@ -1,0 +1,27 @@
+# Each [[books]] entry produces three artefacts under
+# `docs/downloads/<id>/<id>-book.{md,docx,pdf}`.
+# Used by scripts/build_fable_book.py --config scripts/books.toml --all
+
+[[books]]
+id = "fund-fables"
+source = "docs/fables/fund-fables"
+title = "证券投资基金 · 寓言四百六十四"
+subtitle = "基金从业 · 科目二 · 寓言化"
+author = "原作：中国证券投资基金业协会"
+compiler = "寓言整理：王恩培 · 等"
+
+[[books]]
+id = "private-equity-funds"
+source = "docs/fables/private-equity-funds"
+title = "股权投资基金 · 寓言三百三十七"
+subtitle = "基金从业 · 科目三 · 寓言化"
+author = "原作：中国证券投资基金业协会"
+compiler = "寓言整理：王恩培 · 等"
+
+[[books]]
+id = "finite-and-infinite-games"
+source = "docs/fables/finite-and-infinite-games"
+title = "寓言一百零一"
+subtitle = "Finite and Infinite Games · 寓言化"
+author = "原作：James Carse, 1986"
+compiler = "寓言整理：王恩培 · 等"

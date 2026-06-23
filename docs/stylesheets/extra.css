@@ -184,6 +184,26 @@
   color: var(--library-ink) !important;
 }
 
+.library-button--download {
+  background: var(--library-surface);
+  border: 1px solid var(--library-line);
+  color: var(--library-ink) !important;
+  font-weight: 600;
+}
+
+.library-button--download:hover,
+.library-button--download:focus-visible {
+  border-color: var(--library-teal);
+  color: var(--library-teal) !important;
+  background: color-mix(in srgb, var(--library-teal), transparent 92%);
+}
+
+.library-button__icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  display: inline-block;
+}
+
 .library-quick-books {
   display: grid;
   gap: 0.65rem;

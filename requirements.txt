@@ -1,2 +1,6 @@
 mkdocs
 mkdocs-material
+
+# Phase 8 / combined book builder (scripts/build_fable_book.py)
+python-docx
+reportlab
