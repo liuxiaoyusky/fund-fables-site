@@ -24,7 +24,7 @@ hide:
     </a>
   </div>
 
-  <div class="book-home__status" data-role="book-status">共 18 章，464 篇寓言故事。</div>
+  <div class="book-home__status" data-role="book-status">共 18 章，570 篇寓言故事。</div>
 </section>
 
 <section class="book-toc" aria-labelledby="fund-fables-toc-title">
@@ -37,7 +37,7 @@ hide:
     <a class="book-toc-card" href="01-证券投资基金概述/01-证券投资基金简介/01-证券投资基金概念/">
       <span>01</span>
       <strong>证券投资基金概述</strong>
-      <small>基金概念、当事人、服务机构、监管与起源发展。</small>
+      <small>基金概念、当事人、服务机构、监管、自律与起源发展。</small>
     </a>
     <a class="book-toc-card" href="02-基金的类型/01-证券投资基金分类概述/01-分类的意义/">
       <span>02</span>
@@ -69,25 +69,25 @@ hide:
       <strong>另类投资</strong>
       <small>另类投资、大宗商品、不动产和对冲基金。</small>
     </a>
-    <a class="book-toc-card" href="08-投资管理流程/02-投资管理流程分类/01-定制化投资管理流程/">
+    <a class="book-toc-card" href="08-投资管理流程/01-业绩比较基准/01-业绩比较基准的概念/">
       <span>08</span>
       <strong>投资管理流程</strong>
-      <small>定制化流程、标准化流程和基金管理人投资交易框架。</small>
+      <small>业绩比较基准、定制化与标准化投资管理流程和基金管理人框架。</small>
     </a>
     <a class="book-toc-card" href="09-投资组合管理/01-现代投资组合理论/01-投资组合理论发展概述/">
       <span>09</span>
       <strong>投资组合管理</strong>
-      <small>组合理论、资本市场理论、市场有效性、主动投资和多元资产。</small>
+      <small>组合理论、资本市场理论、市场有效性、主动被动投资、多元资产与可持续投资。</small>
     </a>
     <a class="book-toc-card" href="10-投资交易管理/01-证券市场的交易机制/01-交易机制/">
       <span>10</span>
       <strong>投资交易管理</strong>
-      <small>交易机制、做市商、保证金、交易成本和执行缺口。</small>
+      <small>交易机制、做市商、保证金、交易执行、交易成本和执行缺口。</small>
     </a>
-    <a class="book-toc-card" href="11-投资风险管理/01-投资风险概述/01-投资风险概述与风险类型/">
+    <a class="book-toc-card" href="11-投资风险管理/01-投资风险概述/01-市场风险/">
       <span>11</span>
       <strong>投资风险管理</strong>
-      <small>风险类型、风险指标、风险价值、压力测试和基金风险管理。</small>
+      <small>市场、信用、流动性等风险类型、风险指标、风险价值与基金风险管理。</small>
     </a>
     <a class="book-toc-card" href="12-基金业绩评价/01-基金业绩评价概述/01-基金业绩评价概述与目的/">
       <span>12</span>
@@ -97,7 +97,7 @@ hide:
     <a class="book-toc-card" href="13-基金的募集、交易与登记/01-公募基金的募集与认购/">
       <span>13</span>
       <strong>基金的募集、交易与登记</strong>
-      <small>公募与私募基金的募集、备案、份额登记和资金结算。</small>
+      <small>公募与私募基金的募集、交易、份额登记和资金结算。</small>
     </a>
     <a class="book-toc-card" href="14-基金的投资交易与结算/01-基金参与证券交易所二级市场的交易与结算/">
       <span>14</span>
@@ -109,20 +109,20 @@ hide:
       <strong>基金的估值、费用与会计核算</strong>
       <small>基金估值方法、费用结构和财务会计报告分析。</small>
     </a>
-    <a class="book-toc-card" href="16-基金的利润分配与税收/01-基金税收/">
+    <a class="book-toc-card" href="16-基金的利润分配与税收/01-基金利润及利润分配/01-基金利润的构成/">
       <span>16</span>
       <strong>基金的利润分配与税收</strong>
-      <small>基金利润分配规则和相关税收制度。</small>
+      <small>基金利润构成、分配规则和相关税收制度。</small>
     </a>
     <a class="book-toc-card" href="17-基金的信息披露/01-基金信息披露概述/">
       <span>17</span>
       <strong>基金的信息披露</strong>
-      <small>信息披露概述、主要当事人义务和私募基金披露要求。</small>
+      <small>基金信息披露概述、当事人义务、募集、运作和私募基金披露要求。</small>
     </a>
     <a class="book-toc-card" href="18-基金销售基础知识/01-基金投资者/">
       <span>18</span>
       <strong>基金销售基础知识</strong>
-      <small>基金投资者类型、销售机构、策略和业务规范。</small>
+      <small>基金投资者分类、销售机构、策略和业务规范。</small>
     </a>
   </div>
 </section>

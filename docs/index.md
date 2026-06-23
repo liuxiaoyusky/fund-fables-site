@@ -17,7 +17,7 @@ hide:
       <a class="library-quick-book" data-book-id="fund-fables" href="fables/fund-fables/">
         <span>
           <strong>证券投资基金</strong>
-          <small data-role="quick-status">464 篇寓言</small>
+          <small data-role="quick-status">570 篇寓言</small>
         </span>
         <em data-role="quick-action">开始</em>
       </a>
@@ -54,7 +54,7 @@ hide:
 
 <section class="library-stats" aria-label="图书馆统计">
   <div class="library-stat">
-    <span class="library-stat__value">902</span>
+    <span class="library-stat__value">1038</span>
     <span class="library-stat__label">篇寓言故事</span>
   </div>
   <div class="library-stat">
@@ -75,7 +75,7 @@ hide:
 
   <div id="book-gallery" class="book-gallery" aria-label="书籍列表">
     <a class="book-card book-card--fund" data-book-id="fund-fables"
-       data-total-fables="464"
+       data-total-fables="570"
        href="fables/fund-fables/">
       <div class="book-card__cover">
         <div class="book-card__badge" data-role="badge">尚未开始</div>
@@ -92,7 +92,7 @@ hide:
           <span data-role="meter"></span>
         </div>
         <div class="book-card__meta">
-          <span class="book-card__progress" data-role="progress">0 / 464 篇</span>
+          <span class="book-card__progress" data-role="progress">0 / 570 篇</span>
           <span class="book-card__hint" data-role="hint">开始阅读</span>
         </div>
       </div>

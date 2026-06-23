@@ -37,6 +37,13 @@ plugins:
   - search
   - tags
 
+# docs/downloads/ holds built PDF/DOCX/MD artefacts. The merged *.md files
+# there are download artefacts, not navigation pages — but PDF/DOCX must
+# still be served as static files, so we only exclude the .md ones.
+exclude_docs: |
+  downloads/*.md
+  downloads/**/*.md
+
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -66,15 +73,15 @@ nav:
       - 05 固定收益投资: fables/fund-fables/05-固定收益投资/01-债券与债券市场/01-债券市场概述与分类.md
       - 06 衍生工具: fables/fund-fables/06-衍生工具/01-衍生工具概述/01-衍生工具的定义.md
       - 07 另类投资: fables/fund-fables/07-另类投资/01-另类投资概述/01-另类投资的概念与主要类别.md
-      - 08 投资管理流程: fables/fund-fables/08-投资管理流程/02-投资管理流程分类/01-定制化投资管理流程.md
+      - 08 投资管理流程: fables/fund-fables/08-投资管理流程/01-业绩比较基准/01-业绩比较基准的概念.md
       - 09 投资组合管理: fables/fund-fables/09-投资组合管理/01-现代投资组合理论/01-投资组合理论发展概述.md
       - 10 投资交易管理: fables/fund-fables/10-投资交易管理/01-证券市场的交易机制/01-交易机制.md
-      - 11 投资风险管理: fables/fund-fables/11-投资风险管理/01-投资风险概述/01-投资风险概述与风险类型.md
+      - 11 投资风险管理: fables/fund-fables/11-投资风险管理/01-投资风险概述/01-市场风险.md
       - 12 基金业绩评价: fables/fund-fables/12-基金业绩评价/01-基金业绩评价概述/01-基金业绩评价概述与目的.md
       - 13 基金的募集、交易与登记: fables/fund-fables/13-基金的募集、交易与登记/01-公募基金的募集与认购.md
       - 14 基金的投资交易与结算: fables/fund-fables/14-基金的投资交易与结算/01-基金参与证券交易所二级市场的交易与结算.md
       - 15 基金的估值、费用与会计核算: fables/fund-fables/15-基金的估值、费用与会计核算/01-基金财务会计报告分析.md
-      - 16 基金的利润分配与税收: fables/fund-fables/16-基金的利润分配与税收/01-基金税收.md
+      - 16 基金的利润分配与税收: fables/fund-fables/16-基金的利润分配与税收/01-基金利润及利润分配/01-基金利润的构成.md
       - 17 基金的信息披露: fables/fund-fables/17-基金的信息披露/01-基金信息披露概述.md
       - 18 基金销售基础知识: fables/fund-fables/18-基金销售基础知识/01-基金投资者.md
   - 基金从业 · 科目三:
