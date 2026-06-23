@@ -54,12 +54,18 @@ from pathlib import Path
 DEFAULT_OUT_ROOT = Path("docs/downloads")
 TODAY = datetime.date.today().isoformat()
 
-# CJK font candidates (macOS) — first one that registers wins for PDF.
-# For DOCX we use "PingFang SC" which Word resolves to the system Chinese font.
+# CJK font candidates — first one that registers wins for PDF.
+# On macOS, STHeiti is preferred. On Linux (CI), the runner installs
+# `fonts-noto-cjk`, which lives under /usr/share/fonts/.
 CJK_FONT_CANDIDATES = [
+    # macOS (local builds)
     ("STHeiti", "/System/Library/Fonts/STHeiti Medium.ttc", 0),
     ("STHeitiLight", "/System/Library/Fonts/STHeiti Light.ttc", 0),
-    ("PingFang", "/Library/Fonts/Arial Unicode.ttf", 0),  # not CJK but fallback
+    ("PingFang", "/Library/Fonts/Arial Unicode.ttf", 0),
+    # Linux (GitHub Actions ubuntu-latest + fonts-noto-cjk)
+    ("NotoSansCJK", "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc", 0),
+    ("NotoSansCJKsc", "/usr/share/fonts/opentype/noto/NotoSansCJKsc-Regular.otf", 0),
+    ("WenQuanYi", "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc", 0),
 ]
 
 
