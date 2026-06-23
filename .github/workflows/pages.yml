@@ -30,11 +30,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          # Noto CJK is needed by reportlab on the Linux CI runner
-          # (the script falls back through the candidate list in
-          # CJK_FONT_CANDIDATES; on macOS it picks STHeiti first).
+          # wqy-microhei is a TTF (TrueType outlines) that reportlab can
+          # register directly. Noto CJK is .ttc with CFF outlines and
+          # reportlab refuses those. The build script tries wqy first on
+          # Linux and falls back to Noto paths for local dev if available.
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk
+          sudo apt-get install -y fonts-wqy-microhei fonts-noto-cjk
 
       - name: Build combined fables books (PDF + DOCX + MD)
         run: |

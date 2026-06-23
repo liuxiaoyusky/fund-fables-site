@@ -56,16 +56,19 @@ TODAY = datetime.date.today().isoformat()
 
 # CJK font candidates — first one that registers wins for PDF.
 # On macOS, STHeiti is preferred. On Linux (CI), the runner installs
-# `fonts-noto-cjk`, which lives under /usr/share/fonts/.
+# fonts-wqy-microhei (TTF) and fonts-noto-cjk (CFF; reportlab rejects it).
+# We try wqy first on Linux, falling back to Noto paths for local dev.
 CJK_FONT_CANDIDATES = [
     # macOS (local builds)
     ("STHeiti", "/System/Library/Fonts/STHeiti Medium.ttc", 0),
     ("STHeitiLight", "/System/Library/Fonts/STHeiti Light.ttc", 0),
     ("PingFang", "/Library/Fonts/Arial Unicode.ttf", 0),
-    # Linux (GitHub Actions ubuntu-latest + fonts-noto-cjk)
+    # Linux (GitHub Actions ubuntu-latest + fonts-wqy-microhei)
+    # TTF paths come first; CFF/OTF paths are last-resort fallbacks.
+    ("WenQuanYiMicroHei", "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc", 0),
+    ("WenQuanYiZenHei", "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 0),
     ("NotoSansCJK", "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc", 0),
     ("NotoSansCJKsc", "/usr/share/fonts/opentype/noto/NotoSansCJKsc-Regular.otf", 0),
-    ("WenQuanYi", "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc", 0),
 ]
 
 
