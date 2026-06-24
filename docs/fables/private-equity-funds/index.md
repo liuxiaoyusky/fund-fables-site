@@ -24,7 +24,7 @@ hide:
     </a>
   </div>
 
-  <div class="book-home__status" data-role="book-status">共 9 章，337 篇寓言故事。</div>
+  <div class="book-home__status" data-role="book-status">共 9 章，572 篇寓言故事（前 5 章为 v2 重写版，后 4 章为旧版）。</div>
 </section>
 
 <section class="book-toc" aria-labelledby="private-equity-toc-title">
@@ -44,12 +44,12 @@ hide:
       <strong>股权投资基金管理人</strong>
       <small>管理人概述、信义义务、专业要求和内部治理。</small>
     </a>
-    <a class="book-toc-card" href="03-股权投资基金产品/01-股权投资基金产品概述/01-（一）基本信息/">
+    <a class="book-toc-card" href="03-股权投资基金产品/01-股权投资基金产品概述/01-一、产品基本要素/">
       <span>03</span>
       <strong>股权投资基金产品</strong>
       <small>产品概述、公司型/合伙型/契约型基金、创投基金、并购基金、FOF、政府投资基金。</small>
     </a>
-    <a class="book-toc-card" href="04-股权投资基金的募集与设立/01-募集与设立概述/01-（二）募集方式/">
+    <a class="book-toc-card" href="04-股权投资基金的募集与设立/01-募集与设立概述/01-一、募集与设立概述/">
       <span>04</span>
       <strong>股权投资基金的募集与设立</strong>
       <small>募集与设立概述、募集对象、流程和基金合同。</small>
