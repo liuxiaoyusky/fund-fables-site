@@ -907,6 +907,74 @@
   min-height: 1em;
 }
 
+/* ------------------------------------------------------------------
+ * Selection toolbar
+ * The primary mobile highlight path. Appears above the user's current
+ * text selection with a single "✎ 划重点" button — bypasses the
+ * bottom-right panel and the native selection menu's clobber.
+ * ------------------------------------------------------------------ */
+.reader-highlight-toolbar {
+  background: var(--library-ink);
+  border: 1px solid var(--library-ink);
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(6, 63, 61, 0.28);
+  position: fixed;
+  z-index: 40;
+}
+
+.reader-highlight-toolbar[hidden] {
+  display: none;
+}
+
+.reader-highlight-toolbar button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--library-paper);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 780;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  min-height: 2.2rem;
+}
+
+.reader-highlight-toolbar button span:first-child {
+  color: var(--library-gold);
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+.reader-highlight-toolbar::after {
+  border: 6px solid transparent;
+  border-top-color: var(--library-ink);
+  content: "";
+  height: 0;
+  left: 50%;
+  margin-left: -6px;
+  position: absolute;
+  top: 100%;
+  width: 0;
+}
+
+/* When the toolbar can't fit above the selection (top edge of viewport),
+   it flips below — hide the upward arrow in that case. */
+.reader-highlight-toolbar--below::after {
+  border-top-color: transparent;
+  border-bottom-color: var(--library-ink);
+  top: auto;
+  bottom: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reader-highlight-panel,
+  .reader-highlight-toolbar {
+    transition: none;
+  }
+}
+
 @media screen and (max-width: 620px) {
   .reader-highlight-panel {
     bottom: 0.7rem;

@@ -141,15 +141,15 @@
   function saveSelectionAsHighlight(status) {
     var range = selectedRange();
     if (!range) {
-      status.textContent = '先选中一段正文，再点“划重点”。';
-      return;
+      if (status) status.textContent = '先选中一段正文，再点“划重点”。';
+      return false;
     }
 
     var start = offsetForPoint(article, range.startContainer, range.startOffset);
     var end = offsetForPoint(article, range.endContainer, range.endOffset);
     if (start === null || end === null || start === end) {
-      status.textContent = '这段文字暂时不能划重点。';
-      return;
+      if (status) status.textContent = '这段文字暂时不能划重点。';
+      return false;
     }
 
     if (start > end) {
@@ -168,7 +168,8 @@
     writeHighlights(highlights);
     window.getSelection().removeAllRanges();
     restoreHighlights();
-    status.textContent = '已保存本页重点。';
+    if (status) status.textContent = '已保存本页重点。';
+    return true;
   }
 
   function clearHighlights(status) {
@@ -280,6 +281,91 @@
 
     // Expose status for tests / external callers without leaking globals.
     tools.__status = status;
+
+    // Selection toolbar — the primary highlight path on mobile.
+    // After a long-press selects text, browsers raise the native selection
+    // menu; we position a small floating bar above the selection with a
+    // single "✎ 划重点" button, so the user doesn't have to reach the
+    // bottom-right panel while the native menu is still on screen.
+    var toolbar = document.createElement('div');
+    toolbar.className = 'reader-highlight-toolbar';
+    toolbar.setAttribute('role', 'toolbar');
+    toolbar.setAttribute('aria-label', '划重点');
+    toolbar.hidden = true;
+    toolbar.innerHTML =
+      '<button type="button" data-reader-action="toolbar-highlight">' +
+        '<span aria-hidden="true">✎</span>' +
+        '<span>划重点</span>' +
+      '</button>';
+    document.body.appendChild(toolbar);
+
+    function positionToolbar() {
+      var sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0 || sel.isCollapsed) {
+        toolbar.hidden = true;
+        return;
+      }
+      var range = sel.getRangeAt(0);
+      if (!article.contains(range.commonAncestorContainer)) {
+        toolbar.hidden = true;
+        return;
+      }
+      var rect = range.getBoundingClientRect();
+      if (!rect || (rect.width === 0 && rect.height === 0)) {
+        toolbar.hidden = true;
+        return;
+      }
+      var tbWidth = toolbar.offsetWidth || 120;
+      var left = rect.left + rect.width / 2 - tbWidth / 2;
+      var top = rect.top - 44;
+      var viewportW = document.documentElement.clientWidth;
+      var margin = 8;
+      left = Math.max(margin, Math.min(left, viewportW - tbWidth - margin));
+      if (top < margin) top = rect.bottom + 8;
+      toolbar.style.left = left + 'px';
+      toolbar.style.top = top + 'px';
+      toolbar.hidden = false;
+    }
+
+    var toolbarBtn = toolbar.querySelector('button');
+    toolbarBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var saved = saveSelectionAsHighlight(status);
+      toolbar.hidden = true;
+      // Mirror save feedback into the panel status too.
+      if (saved) status.textContent = '已保存本页重点。';
+    });
+
+    // Hide on any of: selection collapse, scroll, escape, click outside.
+    document.addEventListener('selectionchange', positionToolbar);
+    // selectionchange is not always fired after a touch long-press on iOS,
+    // so we also position the toolbar on the trailing mouseup/touchend
+    // events. These fire on real user interaction even when the synthetic
+    // selectionchange is unreliable.
+    function onSelectionFinal() {
+      // Defer one frame so the selection is finalised before measuring.
+      setTimeout(positionToolbar, 0);
+    }
+    document.addEventListener('mouseup', onSelectionFinal);
+    document.addEventListener('touchend', onSelectionFinal);
+    window.addEventListener('scroll', function () { toolbar.hidden = true; }, { passive: true });
+    window.addEventListener('resize', function () { toolbar.hidden = true; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') toolbar.hidden = true;
+    });
+    // Touch/click outside the toolbar dismisses it but keeps the selection
+    // so the user can still use the bottom-right panel if they prefer.
+    document.addEventListener('mousedown', function (e) {
+      if (!toolbar.hidden && !toolbar.contains(e.target)) toolbar.hidden = true;
+    });
+    document.addEventListener('touchstart', function (e) {
+      if (!toolbar.hidden && !toolbar.contains(e.target)) toolbar.hidden = true;
+    }, { passive: true });
+    // The toolbar button's own mousedown/touchstart would otherwise trigger
+    // the dismissal handler above. Stop it from bubbling.
+    toolbar.addEventListener('mousedown', function (e) { e.stopPropagation(); });
+    toolbar.addEventListener('touchstart', function (e) { e.stopPropagation(); }, { passive: true });
   }
 
   fetch(searchIndexUrl())
