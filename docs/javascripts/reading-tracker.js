@@ -3,11 +3,13 @@
 //
 // Responsibilities:
 //   1. Identify the current book + section from the URL.
-//   2. Persist (bookId -> { lastUrl, lastSection, lastReadAt, scrollY }) to
-//      localStorage under the "fables:library" key.
+//   2. Persist (bookId -> { lastUrl, lastSection, lastReadAt,
+//      sections: { [sectionPath]: { scrollY, lastReadAt } } }) to localStorage
+//      under the "fables:library" key.
 //   3. Restore the previous scroll position, with two entry modes:
 //        - explicit ?y=NNN from a cover-card click  (one-shot, then cleaned)
-//        - the saved book.scrollY from a bfcache restore (pageshow.persisted)
+//        - the saved sections[sectionPath].scrollY for THIS section
+//        (so navigating to a different chapter starts from the top)
 //   4. Save the live scrollY on every debounced scroll and on beforeunload.
 (function () {
   'use strict';
@@ -48,6 +50,11 @@
   } catch (e) { state = {}; }
 
   var book = state[info.bookId] || {};
+  // scrollY is per-section, not per-book, so navigating from one chapter to
+  // the next does NOT carry the previous chapter's scroll position. The book
+  // object still tracks lastSection / lastUrl / lastReadAt for the home page.
+  if (!book.sections) book.sections = {};
+  var section = book.sections[info.sectionPath] || (book.sections[info.sectionPath] = {});
 
   function persist() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
@@ -74,7 +81,7 @@
       window.history.replaceState({ scrollY: y }, '', clean);
       return y;
     }
-    if (book.scrollY && book.scrollY > 0) return book.scrollY;
+    if (section.scrollY && section.scrollY > 0) return section.scrollY;
     return null;
   }
 
@@ -109,8 +116,8 @@
   function scheduleSave() {
     if (saveTimer) clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
-      book.scrollY = window.scrollY || window.pageYOffset || 0;
-      book.lastReadAt = Date.now();
+      section.scrollY = window.scrollY || window.pageYOffset || 0;
+      section.lastReadAt = Date.now();
       persist();
     }, SAVE_DEBOUNCE_MS);
   }
@@ -119,8 +126,8 @@
   // Final flush on unload (mobile browsers often skip the last debounce).
   window.addEventListener('beforeunload', function () {
     if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-    book.scrollY = window.scrollY || window.pageYOffset || 0;
-    book.lastReadAt = Date.now();
+    section.scrollY = window.scrollY || window.pageYOffset || 0;
+    section.lastReadAt = Date.now();
     persist();
   });
 
@@ -128,8 +135,8 @@
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') {
       if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-      book.scrollY = window.scrollY || window.pageYOffset || 0;
-      book.lastReadAt = Date.now();
+      section.scrollY = window.scrollY || window.pageYOffset || 0;
+      section.lastReadAt = Date.now();
       persist();
     }
   });

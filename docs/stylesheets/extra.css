@@ -789,6 +789,143 @@
   font-size: 0.68rem;
 }
 
+/* ------------------------------------------------------------------
+ * Floating highlight panel
+ * Docked to the viewport so the highlight / clear controls stay
+ * reachable no matter where the reader is in the chapter.
+ * ------------------------------------------------------------------ */
+.reader-highlight-panel {
+  bottom: clamp(1rem, 3vw, 1.8rem);
+  position: fixed;
+  right: clamp(0.8rem, 2.5vw, 1.6rem);
+  z-index: 30;
+  display: grid;
+  justify-items: end;
+  gap: 0.55rem;
+  max-width: min(18rem, calc(100vw - 1.6rem));
+}
+
+.reader-highlight-panel__toggle {
+  align-items: center;
+  background: var(--library-ink);
+  border: 1px solid var(--library-ink);
+  border-radius: 999px;
+  box-shadow: 0 14px 32px rgba(6, 63, 61, 0.22);
+  color: var(--library-paper);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 780;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.85rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.reader-highlight-panel__toggle:hover,
+.reader-highlight-panel__toggle:focus-visible {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px rgba(6, 63, 61, 0.28);
+}
+
+.reader-highlight-panel__icon {
+  align-items: center;
+  background: var(--library-gold);
+  border-radius: 999px;
+  color: var(--library-ink);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 820;
+  height: 1.55rem;
+  justify-content: center;
+  width: 1.55rem;
+}
+
+.reader-highlight-panel__icon::before {
+  content: "✎";
+}
+
+.reader-highlight-panel--open .reader-highlight-panel__icon::before {
+  content: "×";
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.reader-highlight-panel__body {
+  background: var(--library-surface);
+  border: 1px solid var(--library-line);
+  border-radius: var(--library-radius);
+  box-shadow: 0 24px 60px rgba(6, 63, 61, 0.18);
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  min-width: 14rem;
+}
+
+.reader-highlight-panel__body[hidden] {
+  display: none;
+}
+
+.reader-highlight-panel__body button {
+  background: transparent;
+  border: 1px solid var(--library-line);
+  border-radius: var(--library-radius);
+  color: var(--library-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 780;
+  min-height: 2.35rem;
+  padding: 0.45rem 0.75rem;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.reader-highlight-panel__body button:first-child {
+  background: var(--library-ink);
+  color: var(--library-paper);
+  border-color: var(--library-ink);
+}
+
+.reader-highlight-panel__body button:hover,
+.reader-highlight-panel__body button:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.reader-highlight-panel__body button:first-child:hover,
+.reader-highlight-panel__body button:first-child:focus-visible {
+  background: var(--library-teal-deep);
+  border-color: var(--library-teal-deep);
+}
+
+.reader-highlight-panel__status {
+  color: var(--library-muted);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  min-height: 1em;
+}
+
+@media screen and (max-width: 620px) {
+  .reader-highlight-panel {
+    bottom: 0.7rem;
+    right: 0.7rem;
+    left: 0.7rem;
+    max-width: none;
+    justify-items: stretch;
+  }
+
+  .reader-highlight-panel__toggle {
+    justify-self: end;
+  }
+
+  .reader-highlight-panel__body {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
 mark.reader-highlight {
   background: color-mix(in srgb, var(--library-gold), transparent 58%);
   border-radius: 0.18rem;

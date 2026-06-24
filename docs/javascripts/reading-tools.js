@@ -231,15 +231,7 @@
     if (prev) nav.appendChild(createLink('reader-tools__link', prev.href, '上一篇', shortTitle(prev, '上一章')));
     if (next) nav.appendChild(createLink('reader-tools__link', next.href, '下一篇', shortTitle(next, '下一章')));
 
-    var highlight = document.createElement('div');
-    highlight.className = 'reader-highlight-actions';
-    highlight.innerHTML =
-      '<button type="button" data-reader-action="highlight">划重点</button>' +
-      '<button type="button" data-reader-action="clear">清除本页重点</button>' +
-      '<span data-reader-status>选中文字后保存到本机。</span>';
-
     tools.appendChild(nav);
-    tools.appendChild(highlight);
     article.insertBefore(tools, article.firstChild);
 
     var bottom = document.createElement('nav');
@@ -250,13 +242,44 @@
     if (next) bottom.appendChild(createLink('reader-bottom-nav__link', next.href, '下一篇', shortTitle(next, '下一章')));
     article.appendChild(bottom);
 
-    var status = tools.querySelector('[data-reader-status]');
-    tools.querySelector('[data-reader-action="highlight"]').addEventListener('click', function () {
+    // Floating highlight panel — docked to the bottom-right of the viewport
+    // so the controls stay reachable while the reader is mid-paragraph.
+    var panel = document.createElement('aside');
+    panel.className = 'reader-highlight-panel';
+    panel.setAttribute('aria-label', '划重点');
+    panel.innerHTML =
+      '<button type="button" class="reader-highlight-panel__toggle" ' +
+        'data-reader-action="toggle" aria-expanded="false" aria-controls="reader-highlight-panel__body">' +
+        '<span class="reader-highlight-panel__icon" aria-hidden="true"></span>' +
+        '<span class="reader-highlight-panel__label">划重点</span>' +
+      '</button>' +
+      '<div class="reader-highlight-panel__body" id="reader-highlight-panel__body" hidden>' +
+        '<button type="button" data-reader-action="highlight">保存本段重点</button>' +
+        '<button type="button" data-reader-action="clear">清除本页重点</button>' +
+        '<span class="reader-highlight-panel__status" data-reader-status>选中文字后保存到本机。</span>' +
+      '</div>';
+    document.body.appendChild(panel);
+
+    var toggle = panel.querySelector('[data-reader-action="toggle"]');
+    var body = panel.querySelector('.reader-highlight-panel__body');
+    var status = panel.querySelector('[data-reader-status]');
+    var open = false;
+    toggle.addEventListener('click', function () {
+      open = !open;
+      body.hidden = !open;
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.classList.toggle('reader-highlight-panel--open', open);
+    });
+
+    panel.querySelector('[data-reader-action="highlight"]').addEventListener('click', function () {
       saveSelectionAsHighlight(status);
     });
-    tools.querySelector('[data-reader-action="clear"]').addEventListener('click', function () {
+    panel.querySelector('[data-reader-action="clear"]').addEventListener('click', function () {
       clearHighlights(status);
     });
+
+    // Expose status for tests / external callers without leaking globals.
+    tools.__status = status;
   }
 
   fetch(searchIndexUrl())
