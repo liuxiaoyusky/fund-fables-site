@@ -33,3 +33,11 @@ title = "置身钉内 · 寓言九"
 subtitle = "产品经理的孙子兵法 · 寓言化"
 author = "原作：学习项目 · reading_notes"
 compiler = "寓言整理：王恩培 · 等"
+
+[[books]]
+id = "iique-paper-1"
+source = "docs/fables/iique-paper-1"
+title = "保险原理及实务 · 寓言二百零五"
+subtitle = "IIQE Paper 1 · 寓言化"
+author = "原作：香港职业训练局 (VTC) · IIQE Paper 1 研习资料手册 (2021 版本)"
+compiler = "寓言整理：王恩培 · 等"

@@ -6,38 +6,40 @@ hide:
 ---
 
 <section class="featured" aria-labelledby="featured-title" data-featured-source="fund-fables">
-  <p class="library-kicker featured__kicker">
-    <span data-role="featured-eyebrow">Currently Reading · 续读</span>
-    <span class="featured__vol" aria-hidden="true">Vol. 01</span>
-  </p>
-
-  <h1 id="featured-title" data-role="featured-title">证券投资基金</h1>
-
-  <p class="featured__subtitle" data-role="featured-subtitle">
-    基金从业 · 科目二 · Securities Investment Funds
-  </p>
-
-  <p class="featured__lead" data-role="featured-lead">
-    用故事串起基金分类、投资工具、风险管理和业绩评价，覆盖 18 个章节。
-  </p>
-
   <div class="featured__cover book-card__cover book-card--fund" aria-hidden="true">
     <div class="book-card__spine"></div>
-    <div class="book-card__cover-text">
-      <p class="book-card__eyebrow">基金从业 · 科目二</p>
-      <h2 class="book-card__title">证券投资基金</h2>
-      <p class="book-card__subtitle">Securities Investment Funds</p>
+    <div class="featured__cover-frame">
+      <span class="featured__cover-rule" aria-hidden="true"></span>
+      <span class="featured__cover-vol" data-role="featured-cover-vol">Vol. 01</span>
+      <span class="featured__cover-rule" aria-hidden="true"></span>
     </div>
   </div>
 
   <div class="featured__body">
-    <div class="featured__meter" aria-hidden="true">
-      <span data-role="featured-meter"></span>
-    </div>
+    <p class="library-kicker featured__kicker">
+      <span data-role="featured-eyebrow">Editor’s Pick · 编辑推荐</span>
+      <span class="featured__sep" aria-hidden="true">/</span>
+      <span data-role="featured-vol">Vol. 01</span>
+    </p>
 
-    <div class="featured__meta">
-      <span class="featured__progress" data-role="featured-progress">0 / 570 篇</span>
-      <span class="featured__chapter" data-role="featured-chapter">尚未开始</span>
+    <h1 id="featured-title" data-role="featured-title">证券投资基金</h1>
+
+    <p class="featured__subtitle" data-role="featured-subtitle">
+      基金从业 · 科目二 · Securities Investment Funds
+    </p>
+
+    <p class="featured__lead" data-role="featured-lead">
+      用故事串起基金分类、投资工具、风险管理和业绩评价，覆盖 18 个章节。
+    </p>
+
+    <div class="featured__progress-row">
+      <div class="featured__meter" aria-hidden="true">
+        <span data-role="featured-meter"></span>
+      </div>
+      <div class="featured__meta">
+        <span class="featured__progress" data-role="featured-progress">0 / 570 篇</span>
+        <span class="featured__chapter" data-role="featured-chapter">尚未开始</span>
+      </div>
     </div>
 
     <div class="featured__actions" aria-label="阅读操作">
@@ -53,7 +55,7 @@ hide:
 <section class="library-section shelf" aria-labelledby="shelf-title">
   <div class="library-section__heading">
     <p class="library-kicker">On the Shelf</p>
-    <h2 id="shelf-title">书架 · <span data-role="shelf-count">4</span> 册</h2>
+    <h2 id="shelf-title">书架 · <span data-role="shelf-count">5</span> 册</h2>
   </div>
 
   <ol class="shelf-list" id="book-gallery" aria-label="书籍列表">
@@ -115,6 +117,22 @@ hide:
         <small>产品经理的孙子兵法</small>
       </span>
       <span class="shelf-row__fables">9 篇寓言</span>
+      <span class="shelf-row__bar" aria-hidden="true">
+        <span data-role="meter"></span>
+      </span>
+      <span class="shelf-row__status" data-role="row-status">未开始</span>
+    </li>
+
+    <li class="shelf-row" data-book-id="iique-paper-1"
+        data-total-fables="205"
+        data-href="fables/iique-paper-1/"
+        data-cover-class="book-card--iique">
+      <span class="shelf-row__vol">Vol. 05</span>
+      <span class="shelf-row__title">
+        <strong>保险原理及实务</strong>
+        <small>IIQE Paper 1 · 香港职业训练局</small>
+      </span>
+      <span class="shelf-row__fables">205 篇寓言</span>
       <span class="shelf-row__bar" aria-hidden="true">
         <span data-role="meter"></span>
       </span>

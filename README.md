@@ -33,6 +33,7 @@ mkdocs serve
 | 股权投资基金 | 基金从业 · 科目三 | 572 |
 | 有限与无限的游戏 | Finite and Infinite Games（James Carse, 1986） | 101 |
 | 置身钉内 | 产品经理的孙子兵法 | 9 |
+| 保险原理及实务 | IIQE Paper 1（VTC 2021） | 205 |
 
 进入首页后，最近读过的那本书排在最前；点击封面会直接跳到上次阅读的那一节，并自动滚动到上次停留的位置。阅读进度保存在浏览器的 localStorage 里，关闭页面后下次打开仍能继续。
 
@@ -52,6 +53,10 @@ mkdocs serve
 - 置身钉内：
   ```
   111-置身钉内/converted/fables/
+  ```
+- IIQE Paper 1（香港保险业中介人资格考试卷一）：
+  ```
+  02-iique/paper-1/converted/fables/
   ```
 
 原仓库继续保留完整的备考 / 学习资料，本仓库只负责把寓言故事以更好的阅读体验呈现出来。
