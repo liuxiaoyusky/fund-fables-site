@@ -25,3 +25,11 @@ title = "寓言一百零一"
 subtitle = "Finite and Infinite Games · 寓言化"
 author = "原作：James Carse, 1986"
 compiler = "寓言整理：王恩培 · 等"
+
+[[books]]
+id = "zhishen-dingnei"
+source = "docs/fables/zhishen-dingnei"
+title = "置身钉内 · 寓言九"
+subtitle = "产品经理的孙子兵法 · 寓言化"
+author = "原作：学习项目 · reading_notes"
+compiler = "寓言整理：王恩培 · 等"
