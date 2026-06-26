@@ -76,7 +76,7 @@ hide:
     </li>
 
     <li class="shelf-row" data-book-id="private-equity-funds"
-        data-total-fables="572"
+        data-total-fables="568"
         data-href="fables/private-equity-funds/"
         data-cover-class="book-card--equity">
       <span class="shelf-row__vol">Vol. 02</span>
@@ -84,7 +84,7 @@ hide:
         <strong>股权投资基金</strong>
         <small>基金从业 · 科目三</small>
       </span>
-      <span class="shelf-row__fables">572 篇寓言</span>
+      <span class="shelf-row__fables">568 篇寓言</span>
       <span class="shelf-row__bar" aria-hidden="true">
         <span data-role="meter"></span>
       </span>

@@ -24,7 +24,7 @@ hide:
     </a>
   </div>
 
-  <div class="book-home__status" data-role="book-status">共 9 章，572 篇寓言故事（前 5 章为 v2 重写版，后 4 章为旧版）。</div>
+  <div class="book-home__status" data-role="book-status">共 9 章，568 篇寓言故事（前 6 章为 v2 重写版，后 3 章为旧版）。</div>
 </section>
 
 <section class="book-toc" aria-labelledby="private-equity-toc-title">
@@ -59,7 +59,7 @@ hide:
       <strong>股权投资基金的投资</strong>
       <small>投资流程、调查与分析、项目估值、交易文件和交易结构。</small>
     </a>
-    <a class="book-toc-card" href="06-股权投资基金的投后管理/01-投后管理概述/01-一、投后管理的概念/">
+    <a class="book-toc-card" href="06-股权投资基金的投后管理/01-投后管理概述/44-一、投后管理的概念/">
       <span>06</span>
       <strong>股权投资基金的投后管理</strong>
       <small>投后管理模式、决策机制、组织架构以及基金与项目的投后管理。</small>
