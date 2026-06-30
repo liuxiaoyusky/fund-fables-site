@@ -123,16 +123,16 @@ hide:
       <span class="shelf-row__status" data-role="row-status">未开始</span>
     </li>
 
-    <li class="shelf-row" data-book-id="iique-paper-1"
-        data-total-fables="205"
+    <li class="shelf-row" data-book-id="iique-paper-1-v2"
+        data-total-fables="196"
         data-href="fables/iique-paper-1/"
         data-cover-class="book-card--iique">
       <span class="shelf-row__vol">Vol. 05</span>
       <span class="shelf-row__title">
         <strong>保险原理及实务</strong>
-        <small>IIQE Paper 1 · 香港职业训练局</small>
+        <small>IIQE Paper 1 · v2 新版（v1 原版保留）</small>
       </span>
-      <span class="shelf-row__fables">205 篇寓言</span>
+      <span class="shelf-row__fables">196 篇寓言 · v2</span>
       <span class="shelf-row__bar" aria-hidden="true">
         <span data-role="meter"></span>
       </span>

@@ -41,3 +41,11 @@ title = "保险原理及实务 · 寓言二百零五"
 subtitle = "IIQE Paper 1 · 寓言化"
 author = "原作：香港职业训练局 (VTC) · IIQE Paper 1 研习资料手册 (2021 版本)"
 compiler = "寓言整理：王恩培 · 等"
+
+[[books]]
+id = "iique-paper-1-v2"
+source = "docs/fables/iique-paper-1-v2"
+title = "保险原理及实务 · 寓言一百九十六"
+subtitle = "IIQE Paper 1 · 寓言化 · v2 新版"
+author = "原作：香港职业训练局 (VTC) · IIQE Paper 1 研习资料手册 (2021 版本)"
+compiler = "寓言整理：王恩培 · 等"

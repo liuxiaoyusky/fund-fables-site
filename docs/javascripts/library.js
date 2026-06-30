@@ -9,6 +9,7 @@
   var gallery = document.getElementById('book-gallery');
   var featured = document.querySelector('.featured');
   var bookHome = document.querySelector('[data-book-home]');
+  var bookHomes = document.querySelectorAll('[data-book-home]');
   if (!gallery && !featured && !bookHome) return;
 
   // ---- 1. Read library state ----
@@ -59,11 +60,13 @@
     }
   });
 
-  if (bookHome) {
-    var homeBookId = bookHome.getAttribute('data-book-home');
+  // ---- 3b. Enhance every book-home panel (a page may carry several, e.g.
+  //         the IIQE P1 book home shows v1 and v2 panels behind a switcher) ----
+  Array.prototype.slice.call(bookHomes).forEach(function (bookHomePanel) {
+    var homeBookId = bookHomePanel.getAttribute('data-book-home');
     var homeEntry = state[homeBookId] || null;
-    var continueLink = bookHome.querySelector('[data-role="book-continue"]');
-    var statusLine = bookHome.querySelector('[data-role="book-status"]');
+    var continueLink = bookHomePanel.querySelector('[data-role="book-continue"]');
+    var statusLine = bookHomePanel.querySelector('[data-role="book-status"]');
     if (homeEntry && homeEntry.lastSection) {
       var homeSeen = (homeEntry.lastIndex && homeEntry.lastIndex > 0) ? homeEntry.lastIndex : null;
       if (continueLink) {
@@ -74,6 +77,39 @@
         statusLine.textContent = homeSeen ? '上次读到第 ' + homeSeen + ' 篇，点击继续会回到正文位置。' : '已保存上次阅读位置。';
       }
     }
+  });
+
+  // ---- 3c. Version switcher (IIQE P1 keeps v1 + v2 behind tabs) ----
+  var switcher = document.querySelector('[data-version-switcher]');
+  if (switcher) {
+    var panels = document.querySelectorAll('[data-version-panel]');
+    var tabs = Array.prototype.slice.call(switcher.querySelectorAll('[data-version]'));
+    var VER_PREF_KEY = 'fables:iique-version';
+
+    function showVersion(ver) {
+      Array.prototype.slice.call(panels).forEach(function (p) {
+        p.hidden = (p.getAttribute('data-version-panel') !== ver);
+      });
+      tabs.forEach(function (t) {
+        var active = (t.getAttribute('data-version') === ver);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+        t.classList.toggle('version-tab--active', active);
+      });
+    }
+
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var ver = t.getAttribute('data-version');
+        showVersion(ver);
+        try { localStorage.setItem(VER_PREF_KEY, ver); } catch (e) {}
+      });
+    });
+
+    // Restore saved preference (default v2). Only override if the user has
+    // explicitly chosen v1 before.
+    var savedVer = null;
+    try { savedVer = localStorage.getItem(VER_PREF_KEY); } catch (e) {}
+    if (savedVer === 'v1' || savedVer === 'v2') showVersion(savedVer);
   }
 
   if (!gallery) return;
@@ -136,7 +172,8 @@
           'private-equity-funds': '从概念到退出，9 章 337 篇私募股权基金知识都被改写成连续的小镇故事。',
           'finite-and-infinite-games': '把 James Carse 的小书每一节都改写成 1952 年上海十六铺风格的寓言故事。',
           'zhishen-dingnei': '产品经理读《孙子兵法》：用九篇小故事把"道、天、地、将、法"翻译成日常决策的语言。',
-          'iique-paper-1': '香港保险中介 IIQE 卷一核心考点：从核保到索偿，每一节都换成可以一口气读完的小故事。'
+          'iique-paper-1': '香港保险中介 IIQE 卷一核心考点：从核保到索偿，每一节都换成可以一口气读完的小故事。',
+          'iique-paper-1-v2': '香港保险中介 IIQE 卷一 v2 新版：196 篇老香港风情寓言，叙事与细节全面重写。'
         };
         lead = defaults[featuredId] || '';
       }
@@ -145,7 +182,7 @@
 
     if (coverEl) {
       // Strip previous cover modifier class, add the one matching this row
-      coverEl.classList.remove('book-card--fund', 'book-card--equity', 'book-card--game');
+      coverEl.classList.remove('book-card--fund', 'book-card--equity', 'book-card--game', 'book-card--dingnei', 'book-card--iique');
       if (fCover) coverEl.classList.add(fCover);
     }
 

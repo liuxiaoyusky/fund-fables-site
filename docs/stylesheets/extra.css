@@ -618,6 +618,64 @@
   margin: 0;
 }
 
+/* ---- Version switcher (IIQE P1 keeps v1 + v2 behind tabs) ---- */
+.version-switcher {
+  align-items: center;
+  background: color-mix(in srgb, var(--library-surface), transparent 0%);
+  border: 1px solid var(--library-line);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 0.25rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  padding: 0.3rem;
+}
+
+.version-tab {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--library-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.version-tab:hover,
+.version-tab:focus-visible {
+  color: var(--library-ink);
+  outline: none;
+}
+
+.version-tab__meta {
+  color: var(--library-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.version-tab--active,
+.version-tab--active .version-tab__meta {
+  background: var(--library-ink);
+  color: var(--library-paper);
+}
+
+.version-tab--active .version-tab__meta {
+  background: transparent;
+  opacity: 0.7;
+}
+
+/* Honour the [hidden] attribute on version panels even when the section
+   has its own display rule (.book-home / .book-toc). */
+[data-version-panel][hidden] {
+  display: none !important;
+}
+
 .book-home {
   border-bottom: 1px solid var(--library-line);
   margin-bottom: clamp(2rem, 5vw, 4rem);
