@@ -5,6 +5,18 @@ hide:
   - toc
 ---
 
+<link rel="stylesheet" href="stylesheets/skill-download.css">
+
+<div class="homepage-skill-action">
+  <a class="skill-download-button"
+     href="downloads/skills/fable-teacher.zip"
+     download="fable-teacher.zip"
+     aria-label="下载 Fable Teacher skill（ZIP）">
+    <span aria-hidden="true">↓</span>
+    <span>Download skill</span>
+  </a>
+</div>
+
 <section class="featured" aria-labelledby="featured-title" data-featured-source="fund-fables">
   <div class="featured__cover book-card__cover book-card--fund" aria-hidden="true">
     <div class="book-card__spine"></div>
