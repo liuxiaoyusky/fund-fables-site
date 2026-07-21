@@ -34,6 +34,17 @@
     return state[bookId] || null;
   }
 
+  function preferredMetadata(row) {
+    var useIiqeV1 = row.getAttribute('data-book-id') === 'iique-paper-1-v2'
+      && preferredIiqeVersion === 'v1';
+    return {
+      total: parseInt(row.getAttribute(useIiqeV1 ? 'data-total-fables-v1' : 'data-total-fables'), 10) || 0,
+      subtitle: useIiqeV1 ? row.getAttribute('data-subtitle-v1') : null,
+      fablesLabel: useIiqeV1 ? row.getAttribute('data-fables-label-v1') : null,
+      lead: useIiqeV1 ? row.getAttribute('data-lead-v1') : null
+    };
+  }
+
   function seenCount(entry) {
     if (!entry) return 0;
     var sectionCount = entry.sections ? Object.keys(entry.sections).length : 0;
@@ -130,59 +141,6 @@
     }
   });
 
-  // ---- 3c. Version switcher (IIQE P1 keeps v1 + v2 behind tabs) ----
-  var switcher = document.querySelector('[data-version-switcher]');
-  if (switcher) {
-    var panels = document.querySelectorAll('[data-version-panel]');
-    var tabs = Array.prototype.slice.call(switcher.querySelectorAll('[data-version]'));
-    var VER_PREF_KEY = 'fables:iique-version';
-
-    function showVersion(ver) {
-      Array.prototype.slice.call(panels).forEach(function (p) {
-        p.hidden = (p.getAttribute('data-version-panel') !== ver);
-      });
-      tabs.forEach(function (t) {
-        var active = (t.getAttribute('data-version') === ver);
-        t.setAttribute('aria-selected', active ? 'true' : 'false');
-        t.setAttribute('tabindex', active ? '0' : '-1');
-        t.classList.toggle('version-tab--active', active);
-      });
-    }
-
-    tabs.forEach(function (t, tabIndex) {
-      var ver = t.getAttribute('data-version');
-      var controlled = Array.prototype.slice.call(panels)
-        .filter(function (panel) { return panel.getAttribute('data-version-panel') === ver; })
-        .map(function (panel, panelIndex) {
-          if (!panel.id) panel.id = 'version-' + ver + '-panel-' + panelIndex;
-          return panel.id;
-        });
-      t.setAttribute('aria-controls', controlled.join(' '));
-      t.addEventListener('click', function () {
-        var ver = t.getAttribute('data-version');
-        showVersion(ver);
-        try { localStorage.setItem(VER_PREF_KEY, ver); } catch (e) {}
-      });
-      t.addEventListener('keydown', function (event) {
-        var nextIndex = null;
-        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (tabIndex + 1) % tabs.length;
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (tabIndex - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = tabs.length - 1;
-        if (nextIndex === null) return;
-        event.preventDefault();
-        tabs[nextIndex].focus();
-        tabs[nextIndex].click();
-      });
-    });
-
-    // Restore saved preference (default v2). Only override if the user has
-    // explicitly chosen v1 before.
-    var savedVer = null;
-    try { savedVer = localStorage.getItem(VER_PREF_KEY); } catch (e) {}
-    showVersion(savedVer === 'v1' ? 'v1' : 'v2');
-  }
-
   if (!gallery) return;
 
   var rows = Array.prototype.slice.call(gallery.querySelectorAll('.shelf-row'));
@@ -212,8 +170,10 @@
     var fEntry = entryForBook(featuredId);
     var fTitle = featuredRow.querySelector('.shelf-row__title strong');
     var fSub   = featuredRow.querySelector('.shelf-row__title small');
-    var fTotal = parseInt(featuredRow.getAttribute('data-total-fables'), 10) || 0;
+    var featuredMetadata = preferredMetadata(featuredRow);
+    var fTotal = featuredMetadata.total;
     var fHref  = featuredRow.getAttribute('data-href') || '';
+    var hasVersions = featuredRow.getAttribute('data-has-versions') === 'true';
     var fCover = featuredRow.getAttribute('data-cover-class') || 'book-card--fund';
     var fVol   = featuredRow.querySelector('.shelf-row__vol');
 
@@ -225,6 +185,7 @@
     var progEl   = featured.querySelector('[data-role="featured-progress"]');
     var chapEl   = featured.querySelector('[data-role="featured-chapter"]');
     var ctaEl    = featured.querySelector('[data-role="featured-cta"]');
+    var secondaryEl = featured.querySelector('[data-role="featured-secondary"]');
     var eyebrow  = featured.querySelector('[data-role="featured-eyebrow"]');
     var volEl    = featured.querySelector('[data-role="featured-vol"]');
     var coverVol = featured.querySelector('[data-role="featured-cover-vol"]');
@@ -233,10 +194,10 @@
     coverEl = featured.querySelector('.featured__cover') || coverEl;
 
     if (titleEl && fTitle) titleEl.textContent = fTitle.textContent;
-    if (subEl && fSub) subEl.textContent = fSub.textContent;
+    if (subEl && fSub) subEl.textContent = featuredMetadata.subtitle || fSub.textContent;
     if (leadEl) {
       // Lead text: prefer a row-scoped dataset, otherwise a default per book
-      var lead = featuredRow.getAttribute('data-lead');
+      var lead = featuredMetadata.lead || featuredRow.getAttribute('data-lead');
       if (!lead) {
         var defaults = {
           'fund-fables': '用故事串起基金分类、投资工具、风险管理和业绩评价，覆盖 18 个章节。',
@@ -277,6 +238,10 @@
       ctaEl.textContent = seen ? '继续阅读' : '开始阅读';
       ctaEl.setAttribute('href', entryTarget(fEntry, fHref));
     }
+    if (secondaryEl) {
+      secondaryEl.textContent = hasVersions ? '选择版本' : '查看目录';
+      secondaryEl.setAttribute('href', fHref);
+    }
 
     if (eyebrow) {
       eyebrow.textContent = seen
@@ -289,11 +254,17 @@
   //         visible so the shelf always contains the stated five books. ----
   rows.forEach(function (row) {
     var bookId  = row.getAttribute('data-book-id');
-    var total   = parseInt(row.getAttribute('data-total-fables'), 10) || 0;
+    var metadata = preferredMetadata(row);
+    var total   = metadata.total;
     var status  = row.querySelector('[data-role="row-status"]');
     var meter   = row.querySelector('[data-role="meter"]');
     var entry   = entryForBook(bookId);
+    var rowSubtitle = row.querySelector('.shelf-row__title small');
+    var rowFables = row.querySelector('.shelf-row__fables');
     row.classList.remove('shelf-row--hidden');
+
+    if (metadata.subtitle && rowSubtitle) rowSubtitle.textContent = metadata.subtitle;
+    if (metadata.fablesLabel && rowFables) rowFables.textContent = metadata.fablesLabel;
 
     if (entry && entry.lastSection) {
       var firstSeg = entry.lastSection.split('/')[0];
@@ -320,14 +291,19 @@
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
       ev.preventDefault();
       var fallback = row.getAttribute('data-href');
-      var target = entryTarget(entry, fallback);
+      var target = row.getAttribute('data-has-versions') === 'true'
+        ? fallback
+        : entryTarget(entry, fallback);
       window.location.assign(target);
     });
 
     row.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Enter' && ev.key !== ' ') return;
       ev.preventDefault();
-      var target = entryTarget(entry, row.getAttribute('data-href'));
+      var fallback = row.getAttribute('data-href');
+      var target = row.getAttribute('data-has-versions') === 'true'
+        ? fallback
+        : entryTarget(entry, fallback);
       window.location.assign(target);
     });
 

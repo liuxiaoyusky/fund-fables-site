@@ -40,7 +40,7 @@
 
   var info = classify(window.location.pathname);
   if (!info) return;
-  if (info.sectionPath === 'index') return;
+  if (info.sectionPath === 'index' || info.sectionPath === 'catalog') return;
 
   // ---- 2. Read library state ----
   var state = {};

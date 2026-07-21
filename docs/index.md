@@ -49,7 +49,8 @@ download_skill: true
          data-role="featured-cta"
          href="fables/fund-fables/">开始阅读</a>
       <a class="library-button library-button--ghost"
-         href="fables/fund-fables/#book-toc">查看目录</a>
+         data-role="featured-secondary"
+         href="fables/fund-fables/">选择版本</a>
     </div>
   </div>
 </section>
@@ -64,6 +65,7 @@ download_skill: true
     <li class="shelf-row" data-book-id="fund-fables"
         data-total-fables="570"
         data-href="fables/fund-fables/"
+        data-has-versions="true"
         data-cover-class="book-card--fund">
       <span class="shelf-row__vol">Vol. 01</span>
       <span class="shelf-row__title">
@@ -127,7 +129,12 @@ download_skill: true
 
     <li class="shelf-row" data-book-id="iique-paper-1-v2"
         data-total-fables="196"
+        data-total-fables-v1="205"
+        data-subtitle-v1="IIQE Paper 1 · v1 原版（v2 新版可切换）"
+        data-fables-label-v1="205 篇寓言 · v1"
+        data-lead-v1="香港保险中介 IIQE 卷一 v1 原版：205 篇老香港风情寓言，保留作为对照与参考。"
         data-href="fables/iique-paper-1/"
+        data-has-versions="true"
         data-cover-class="book-card--iique">
       <span class="shelf-row__vol">Vol. 05</span>
       <span class="shelf-row__title">

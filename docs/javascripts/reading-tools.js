@@ -22,14 +22,17 @@
     var match = path.match(/^\/?fables\/([^/]+)\/(.+)$/);
     if (!match) return null;
     if (match[2] === '') return null;
-    if (match[2] === 'index/' || match[2] === 'progress/') return null;
+    if (match[2] === 'index/' || match[2] === 'catalog/' || match[2] === 'progress/') return null;
+    var catalogPaths = {
+      'fund-fables': '/fables/fund-fables/catalog/',
+      'iique-paper-1': '/fables/iique-paper-1/catalog/',
+      'iique-paper-1-v2': '/fables/iique-paper-1-v2/catalog/'
+    };
     return {
       path: path.charAt(0) === '/' ? path : '/' + path,
       bookId: match[1],
       bookPath: '/fables/' + match[1] + '/',
-      catalogPath: match[1] === 'iique-paper-1-v2'
-        ? '/fables/iique-paper-1/'
-        : '/fables/' + match[1] + '/'
+      catalogPath: catalogPaths[match[1]] || '/fables/' + match[1] + '/'
     };
   }
 

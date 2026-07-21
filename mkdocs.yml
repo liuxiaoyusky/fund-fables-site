@@ -41,6 +41,9 @@ plugins:
   - search
   - tags
 
+hooks:
+  - scripts/catalog_hook.py
+
 # docs/downloads/ holds built PDF/DOCX/MD artefacts. The merged *.md files
 # there are download artefacts, not navigation pages — but PDF/DOCX must
 # still be served as static files, so we only exclude the .md ones.
@@ -63,6 +66,7 @@ extra_css:
   - stylesheets/skill-download.css
 
 extra_javascript:
+  - javascripts/catalog.js
   - javascripts/library.js
   - javascripts/reading-tracker.js
   - javascripts/reading-tools.js
