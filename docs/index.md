@@ -3,19 +3,8 @@ title: 寓言图书馆
 hide:
   - navigation
   - toc
+download_skill: true
 ---
-
-<link rel="stylesheet" href="stylesheets/skill-download.css">
-
-<div class="homepage-skill-action">
-  <a class="skill-download-button"
-     href="downloads/skills/fable-teacher.zip"
-     download="fable-teacher.zip"
-     aria-label="下载 Fable Teacher skill（ZIP）">
-    <span aria-hidden="true">↓</span>
-    <span>Download skill</span>
-  </a>
-</div>
 
 <section class="featured" aria-labelledby="featured-title" data-featured-source="fund-fables">
   <div class="featured__cover book-card__cover book-card--fund" aria-hidden="true">
@@ -45,12 +34,13 @@ hide:
     </p>
 
     <div class="featured__progress-row">
-      <div class="featured__meter" aria-hidden="true">
-        <span data-role="featured-meter"></span>
-      </div>
+      <span class="featured__progress-label">阅读进度</span>
       <div class="featured__meta">
         <span class="featured__progress" data-role="featured-progress">0 / 570 篇</span>
         <span class="featured__chapter" data-role="featured-chapter">尚未开始</span>
+      </div>
+      <div class="featured__meter" aria-hidden="true">
+        <span data-role="featured-meter"></span>
       </div>
     </div>
 

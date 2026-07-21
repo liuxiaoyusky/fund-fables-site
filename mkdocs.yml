@@ -5,13 +5,17 @@ copyright: Copyright &copy; 2026
 
 theme:
   name: material
+  custom_dir: overrides
   language: zh
+  # Typography roles use local CJK font stacks from DESIGN.md. Avoid loading
+  # Roboto/Roboto Mono when those fonts are not part of the reading system.
+  font: false
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: teal
-      accent: teal
+      accent: red
       toggle:
         icon: material/brightness-7
         name: 切换到深色模式
@@ -19,7 +23,7 @@ theme:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: teal
-      accent: teal
+      accent: red
       toggle:
         icon: material/brightness-4
         name: 切换到浅色模式
@@ -56,6 +60,7 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/skill-download.css
 
 extra_javascript:
   - javascripts/library.js

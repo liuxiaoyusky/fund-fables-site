@@ -9,10 +9,12 @@
   var collator = new Intl.Collator('zh-Hans-CN', { numeric: true, sensitivity: 'base' });
 
   function normalisePath(pathname) {
-    return (pathname || '/')
+    var path = (pathname || '/')
       .replace(/\/index\.html$/, '/')
       .replace(/\.html$/, '/')
       .replace(/\/+$/, '/') || '/';
+    try { path = decodeURIComponent(path); } catch (e) {}
+    return path;
   }
 
   function classify(pathname) {
@@ -24,13 +26,18 @@
     return {
       path: path.charAt(0) === '/' ? path : '/' + path,
       bookId: match[1],
-      bookPath: '/fables/' + match[1] + '/'
+      bookPath: '/fables/' + match[1] + '/',
+      catalogPath: match[1] === 'iique-paper-1-v2'
+        ? '/fables/iique-paper-1/'
+        : '/fables/' + match[1] + '/'
     };
   }
 
   var page = classify(window.location.pathname);
   var article = document.querySelector('.md-content__inner');
   if (!page || !article) return;
+  document.body.classList.add('page-reader');
+  article.classList.add('reader-article');
 
   function storageKey() {
     return HIGHLIGHT_PREFIX + page.path;
@@ -220,26 +227,34 @@
     return link;
   }
 
-  function insertReaderTools(prev, next) {
+  function insertReaderTools(prev, next, currentIndex, total) {
     var tools = document.createElement('nav');
     tools.className = 'reader-tools';
     tools.setAttribute('aria-label', '阅读工具');
+    tools.style.setProperty('--reader-progress', total > 0 ? (currentIndex + 1) / total : 0);
 
     var nav = document.createElement('div');
     nav.className = 'reader-tools__nav';
     nav.appendChild(createLink('reader-tools__link', '/', '主页', '回到书架首页'));
-    nav.appendChild(createLink('reader-tools__link', page.bookPath, '本书目录', '选择章节'));
+    nav.appendChild(createLink('reader-tools__link', page.catalogPath, '本书目录', '选择章节'));
     if (prev) nav.appendChild(createLink('reader-tools__link', prev.href, '上一篇', shortTitle(prev, '上一章')));
     if (next) nav.appendChild(createLink('reader-tools__link', next.href, '下一篇', shortTitle(next, '下一章')));
 
     tools.appendChild(nav);
+
+    var position = document.createElement('div');
+    position.className = 'reader-tools__position';
+    position.innerHTML = '<span>Reading position</span><strong>' +
+      String(currentIndex + 1).padStart(3, '0') + ' / ' + String(total).padStart(3, '0') +
+      '</strong>';
+    tools.appendChild(position);
     article.insertBefore(tools, article.firstChild);
 
     var bottom = document.createElement('nav');
     bottom.className = 'reader-bottom-nav';
     bottom.setAttribute('aria-label', '章节切换');
     if (prev) bottom.appendChild(createLink('reader-bottom-nav__link', prev.href, '上一篇', shortTitle(prev, '上一章')));
-    bottom.appendChild(createLink('reader-bottom-nav__link', page.bookPath, '本书目录', '返回章节选择'));
+    bottom.appendChild(createLink('reader-bottom-nav__link', page.catalogPath, '本书目录', '返回章节选择'));
     if (next) bottom.appendChild(createLink('reader-bottom-nav__link', next.href, '下一篇', shortTitle(next, '下一章')));
     article.appendChild(bottom);
 
@@ -251,7 +266,6 @@
     panel.innerHTML =
       '<button type="button" class="reader-highlight-panel__toggle" ' +
         'data-reader-action="toggle" aria-expanded="false" aria-controls="reader-highlight-panel__body">' +
-        '<span class="reader-highlight-panel__icon" aria-hidden="true"></span>' +
         '<span class="reader-highlight-panel__label">划重点</span>' +
       '</button>' +
       '<div class="reader-highlight-panel__body" id="reader-highlight-panel__body" hidden>' +
@@ -285,7 +299,7 @@
     // Selection toolbar — the primary highlight path on mobile.
     // After a long-press selects text, browsers raise the native selection
     // menu; we position a small floating bar above the selection with a
-    // single "✎ 划重点" button, so the user doesn't have to reach the
+    // single “划重点” button, so the user doesn't have to reach the
     // bottom-right panel while the native menu is still on screen.
     var toolbar = document.createElement('div');
     toolbar.className = 'reader-highlight-toolbar';
@@ -293,10 +307,7 @@
     toolbar.setAttribute('aria-label', '划重点');
     toolbar.hidden = true;
     toolbar.innerHTML =
-      '<button type="button" data-reader-action="toolbar-highlight">' +
-        '<span aria-hidden="true">✎</span>' +
-        '<span>划重点</span>' +
-      '</button>';
+      '<button type="button" data-reader-action="toolbar-highlight">划重点</button>';
     document.body.appendChild(toolbar);
 
     function positionToolbar() {
@@ -375,7 +386,7 @@
       var pages = uniquePages(index.docs);
       var currentIndex = pages.findIndex(function (item) { return item.href === page.path; });
       if (currentIndex === -1) return;
-      insertReaderTools(pages[currentIndex - 1] || null, pages[currentIndex + 1] || null);
+      insertReaderTools(pages[currentIndex - 1] || null, pages[currentIndex + 1] || null, currentIndex, pages.length);
       restoreHighlights();
     })
     .catch(function () {});

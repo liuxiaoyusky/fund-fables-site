@@ -1,58 +1,54 @@
-.homepage-skill-action {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0.7rem 0 0.9rem;
-}
-
 .skill-download-button {
   align-items: center;
-  background: var(--fable-role-surface, var(--library-surface));
-  border: 1px solid var(--fable-role-outline, var(--library-control-line));
-  border-radius: 999px;
-  color: var(--fable-role-on-surface, var(--library-ink)) !important;
+  background: transparent;
+  border: 1px solid var(--fable-role-control-outline, #789496);
+  border-radius: 3px;
+  color: var(--fable-role-primary, #174b67) !important;
   display: inline-flex;
-  font-size: var(--fable-type-label-md-size, 14px);
-  font-weight: var(--fable-weight-medium, 600);
-  gap: 0.42rem;
-  min-height: 2.15rem;
-  padding: 0.34rem 0.72rem;
+  flex: 0 0 auto;
+  font-family: var(--fable-font-ui, "PingFang SC", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  gap: 0.45rem;
+  height: 42px;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  padding: 0 0.9rem;
   text-decoration: none !important;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  white-space: nowrap;
 }
 
-.skill-download-button > span:first-child {
-  color: var(--fable-role-tertiary, var(--library-red));
-  font-size: 1rem;
-  line-height: 1;
-  transform: translateY(-0.04rem);
+.skill-download-button svg {
+  fill: currentColor;
+  height: 1rem;
+  width: 1rem;
 }
 
-.skill-download-button:hover,
-.skill-download-button:focus-visible {
-  background: var(--fable-role-secondary-container, var(--library-surface));
-  border-color: var(--fable-role-secondary, var(--library-teal));
-  color: var(--fable-role-on-secondary-container, var(--library-teal-deep)) !important;
-  outline: none;
-  transform: translateY(-1px);
+.skill-download-button:hover {
+  background: var(--fable-role-canvas, #edf3f4);
+  border-color: var(--fable-role-primary, #174b67);
 }
 
 .skill-download-button:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fable-role-secondary, var(--library-teal)), transparent 74%);
+  border-color: var(--fable-role-primary, #174b67);
+  outline: 3px solid var(--fable-role-state-current, #d76855);
+  outline-offset: 3px;
 }
 
-@media screen and (max-width: 620px) {
-  .homepage-skill-action {
-    margin-top: 0.2rem;
+@media screen and (max-width: 600px) {
+  .md-header__skill {
+    height: 36px;
+    padding: 0 0.65rem;
+  }
+
+  .md-header__skill span {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .skill-download-button {
     transition: none;
-  }
-
-  .skill-download-button:hover,
-  .skill-download-button:focus-visible {
-    transform: none;
   }
 }

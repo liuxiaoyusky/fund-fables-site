@@ -17,10 +17,10 @@ hide:
     <a class="library-button library-button--primary" data-role="book-continue" href="01-there-are-at-least-two-kinds-of-games/01-01/">从第一篇开始</a>
     <a class="library-button library-button--ghost" href="../../">返回书架</a>
     <a class="library-button library-button--download" href="../../downloads/finite-and-infinite-games/finite-and-infinite-games-book.pdf" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 PDF
+      下载 PDF
     </a>
     <a class="library-button library-button--download" href="../../downloads/finite-and-infinite-games/finite-and-infinite-games-book.docx" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 Word
+      下载 Word
     </a>
   </div>
 

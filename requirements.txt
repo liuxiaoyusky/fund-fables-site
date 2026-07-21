@@ -1,5 +1,5 @@
-mkdocs
-mkdocs-material
+mkdocs==1.6.1
+mkdocs-material==9.7.6
 
 # Phase 8 / combined book builder (scripts/build_fable_book.py)
 python-docx

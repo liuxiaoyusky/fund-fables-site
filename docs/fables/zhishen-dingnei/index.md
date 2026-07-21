@@ -19,10 +19,10 @@ hide:
     <a class="library-button library-button--primary" data-role="book-continue" href="00-序章/01-序章/">从第一篇开始</a>
     <a class="library-button library-button--ghost" href="../../">返回书架</a>
     <a class="library-button library-button--download" href="../../downloads/zhishen-dingnei/zhishen-dingnei-book.pdf" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 PDF
+      下载 PDF
     </a>
     <a class="library-button library-button--download" href="../../downloads/zhishen-dingnei/zhishen-dingnei-book.docx" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 Word
+      下载 Word
     </a>
   </div>
 

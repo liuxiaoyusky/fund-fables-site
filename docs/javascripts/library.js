@@ -12,6 +12,9 @@
   var bookHomes = document.querySelectorAll('[data-book-home]');
   if (!gallery && !featured && !bookHome) return;
 
+  if (gallery || featured) document.body.classList.add('page-library-home');
+  if (bookHome) document.body.classList.add('page-book-directory');
+
   // ---- 1. Read library state ----
   var state = {};
   try {
@@ -19,9 +22,36 @@
     state = raw ? JSON.parse(raw) : {};
   } catch (e) { state = {}; }
 
+  var preferredIiqeVersion = 'v2';
+  try {
+    preferredIiqeVersion = localStorage.getItem('fables:iique-version') === 'v1' ? 'v1' : 'v2';
+  } catch (e) {}
+
+  function entryForBook(bookId) {
+    if (bookId === 'iique-paper-1-v2' && preferredIiqeVersion === 'v1') {
+      return state['iique-paper-1'] || null;
+    }
+    return state[bookId] || null;
+  }
+
+  function seenCount(entry) {
+    if (!entry) return 0;
+    var sectionCount = entry.sections ? Object.keys(entry.sections).length : 0;
+    if (sectionCount > 0) return sectionCount;
+    return entry.lastIndex && entry.lastIndex > 0 ? entry.lastIndex : 0;
+  }
+
+  function savedScrollY(entry) {
+    if (!entry) return 0;
+    var section = entry.lastSection && entry.sections ? entry.sections[entry.lastSection] : null;
+    var y = section ? parseInt(section.scrollY, 10) : 0;
+    return isNaN(y) ? 0 : y;
+  }
+
   // ---- 2. Pretty-print a chapter slug ----
   function prettyChapter(slug) {
     if (!slug) return '';
+    try { slug = decodeURIComponent(slug); } catch (e) {}
     return slug
       .replace(/^\d+-/, function (m) { return m + ' '; })
       .split('-')
@@ -37,7 +67,7 @@
 
   function entryTarget(entry, fallback) {
     if (entry && entry.lastUrl) {
-      var y = parseInt(entry.scrollY, 10);
+      var y = savedScrollY(entry);
       return normaliseStoredUrl(entry.lastUrl) + (y > 0 ? '?y=' + y : '');
     }
     return fallback;
@@ -48,12 +78,12 @@
 
   quickLinks.forEach(function (link) {
     var bookId = link.getAttribute('data-book-id');
-    var entry = state[bookId] || null;
+    var entry = entryForBook(bookId);
     var status = link.querySelector('[data-role="quick-status"]');
     var action = link.querySelector('[data-role="quick-action"]');
 
     if (entry && entry.lastSection) {
-      var seen = (entry.lastIndex && entry.lastIndex > 0) ? entry.lastIndex : null;
+      var seen = seenCount(entry) || null;
       if (status) status.textContent = seen ? '读到第 ' + seen + ' 篇' : '可继续阅读';
       if (action) action.textContent = '继续';
       link.setAttribute('href', entryTarget(entry, link.getAttribute('href')));
@@ -68,7 +98,7 @@
     var continueLink = bookHomePanel.querySelector('[data-role="book-continue"]');
     var statusLine = bookHomePanel.querySelector('[data-role="book-status"]');
     if (homeEntry && homeEntry.lastSection) {
-      var homeSeen = (homeEntry.lastIndex && homeEntry.lastIndex > 0) ? homeEntry.lastIndex : null;
+      var homeSeen = seenCount(homeEntry) || null;
       if (continueLink) {
         continueLink.textContent = homeSeen ? '继续阅读第 ' + homeSeen + ' 篇' : '继续阅读';
         continueLink.setAttribute('href', entryTarget(homeEntry, continueLink.getAttribute('href')));
@@ -76,6 +106,27 @@
       if (statusLine) {
         statusLine.textContent = homeSeen ? '上次读到第 ' + homeSeen + ' 篇，点击继续会回到正文位置。' : '已保存上次阅读位置。';
       }
+    }
+
+    var version = bookHomePanel.getAttribute('data-version-panel');
+    var toc = document.querySelector('.book-toc[data-version-panel="' + version + '"]');
+    if (toc) {
+      Array.prototype.slice.call(toc.querySelectorAll('.book-toc-card[data-chapter-key]')).forEach(function (card) {
+        var chapterKey = card.getAttribute('data-chapter-key');
+        var total = parseInt(card.getAttribute('data-chapter-total'), 10) || 0;
+        var sections = homeEntry && homeEntry.sections ? Object.keys(homeEntry.sections) : [];
+        var count = sections.filter(function (sectionPath) {
+          return sectionPath === chapterKey || sectionPath.indexOf(chapterKey + '/') === 0;
+        }).length;
+        var progress = total > 0 ? Math.min(count / total, 1) : 0;
+        var progressEl = card.querySelector('[data-role="chapter-progress"]');
+        var statusEl = card.querySelector('[data-role="chapter-status"]');
+        card.style.setProperty('--chapter-progress', progress);
+        card.classList.toggle('book-toc-card--seen', count > 0 && count < total);
+        card.classList.toggle('book-toc-card--complete', total > 0 && count >= total);
+        if (progressEl) progressEl.textContent = count + ' / ' + total;
+        if (statusEl) statusEl.textContent = count >= total && total > 0 ? '已完成' : (count > 0 ? '阅读中' : '未开始');
+      });
     }
   });
 
@@ -93,15 +144,35 @@
       tabs.forEach(function (t) {
         var active = (t.getAttribute('data-version') === ver);
         t.setAttribute('aria-selected', active ? 'true' : 'false');
+        t.setAttribute('tabindex', active ? '0' : '-1');
         t.classList.toggle('version-tab--active', active);
       });
     }
 
-    tabs.forEach(function (t) {
+    tabs.forEach(function (t, tabIndex) {
+      var ver = t.getAttribute('data-version');
+      var controlled = Array.prototype.slice.call(panels)
+        .filter(function (panel) { return panel.getAttribute('data-version-panel') === ver; })
+        .map(function (panel, panelIndex) {
+          if (!panel.id) panel.id = 'version-' + ver + '-panel-' + panelIndex;
+          return panel.id;
+        });
+      t.setAttribute('aria-controls', controlled.join(' '));
       t.addEventListener('click', function () {
         var ver = t.getAttribute('data-version');
         showVersion(ver);
         try { localStorage.setItem(VER_PREF_KEY, ver); } catch (e) {}
+      });
+      t.addEventListener('keydown', function (event) {
+        var nextIndex = null;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (tabIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (tabIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        if (nextIndex === null) return;
+        event.preventDefault();
+        tabs[nextIndex].focus();
+        tabs[nextIndex].click();
       });
     });
 
@@ -109,7 +180,7 @@
     // explicitly chosen v1 before.
     var savedVer = null;
     try { savedVer = localStorage.getItem(VER_PREF_KEY); } catch (e) {}
-    if (savedVer === 'v1' || savedVer === 'v2') showVersion(savedVer);
+    showVersion(savedVer === 'v1' ? 'v1' : 'v2');
   }
 
   if (!gallery) return;
@@ -121,7 +192,7 @@
   var featuredId = null;
   var bestTime = -1;
   rows.forEach(function (row) {
-    var entry = state[row.getAttribute('data-book-id')] || {};
+    var entry = entryForBook(row.getAttribute('data-book-id')) || {};
     var t = entry.lastReadAt || 0;
     if (t > bestTime) { bestTime = t; featuredId = row.getAttribute('data-book-id'); }
   });
@@ -138,7 +209,7 @@
 
   // ---- 5. Hydrate the featured slot from the chosen row's metadata ----
   if (featured) {
-    var fEntry = state[featuredId] || null;
+    var fEntry = entryForBook(featuredId);
     var fTitle = featuredRow.querySelector('.shelf-row__title strong');
     var fSub   = featuredRow.querySelector('.shelf-row__title small');
     var fTotal = parseInt(featuredRow.getAttribute('data-total-fables'), 10) || 0;
@@ -169,7 +240,7 @@
       if (!lead) {
         var defaults = {
           'fund-fables': '用故事串起基金分类、投资工具、风险管理和业绩评价，覆盖 18 个章节。',
-          'private-equity-funds': '从概念到退出，9 章 337 篇私募股权基金知识都被改写成连续的小镇故事。',
+          'private-equity-funds': '从概念到退出，9 章 568 篇私募股权基金知识都被改写成连续的小镇故事。',
           'finite-and-infinite-games': '把 James Carse 的小书每一节都改写成 1952 年上海十六铺风格的寓言故事。',
           'zhishen-dingnei': '产品经理读《孙子兵法》：用九篇小故事把"道、天、地、将、法"翻译成日常决策的语言。',
           'iique-paper-1': '香港保险中介 IIQE 卷一核心考点：从核保到索偿，每一节都换成可以一口气读完的小故事。',
@@ -190,11 +261,11 @@
     if (coverVol && fVol) coverVol.textContent = fVol.textContent.replace(/^Vol\.\s*/, '').trim();
 
     // Progress + chapter + CTA
-    var seen = (fEntry && fEntry.lastIndex && fEntry.lastIndex > 0) ? fEntry.lastIndex : null;
+    var seen = seenCount(fEntry) || null;
     var firstSeg = fEntry && fEntry.lastSection ? fEntry.lastSection.split('/')[0] : '';
     var chapter = firstSeg ? prettyChapter(firstSeg) : '';
 
-    if (progEl) progEl.textContent = seen ? (seen + ' / ' + fTotal + ' 篇') : ('共 ' + fTotal + ' 篇寓言');
+    if (progEl) progEl.textContent = (seen || 0) + ' / ' + fTotal + ' 篇';
     if (chapEl) chapEl.textContent = seen ? ('读到第 ' + seen + ' 篇') : (chapter ? ('最近读到 · ' + chapter) : '尚未开始');
 
     if (meterEl) {
@@ -214,24 +285,20 @@
     }
   }
 
-  // ---- 6. Mark rows + fill shelf-row state, hide the featured one ----
+  // ---- 6. Mark rows + fill shelf-row state. The featured book remains
+  //         visible so the shelf always contains the stated five books. ----
   rows.forEach(function (row) {
     var bookId  = row.getAttribute('data-book-id');
     var total   = parseInt(row.getAttribute('data-total-fables'), 10) || 0;
     var status  = row.querySelector('[data-role="row-status"]');
     var meter   = row.querySelector('[data-role="meter"]');
-    var entry   = state[bookId] || null;
-
-    if (bookId === featuredId) {
-      row.classList.add('shelf-row--hidden');
-    } else {
-      row.classList.remove('shelf-row--hidden');
-    }
+    var entry   = entryForBook(bookId);
+    row.classList.remove('shelf-row--hidden');
 
     if (entry && entry.lastSection) {
       var firstSeg = entry.lastSection.split('/')[0];
       var chapter  = prettyChapter(firstSeg);
-      var seen     = (entry.lastIndex && entry.lastIndex > 0) ? entry.lastIndex : null;
+      var seen     = seenCount(entry) || null;
 
       row.classList.add('shelf-row--seen');
       if (status) status.textContent = seen ? ('读到第 ' + seen + ' 篇') : (chapter || '可继续');
@@ -257,21 +324,22 @@
       window.location.assign(target);
     });
 
+    row.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      ev.preventDefault();
+      var target = entryTarget(entry, row.getAttribute('data-href'));
+      window.location.assign(target);
+    });
+
     // Make rows keyboard-focusable so the red hover bar works without a mouse
     row.setAttribute('tabindex', '0');
     row.setAttribute('role', 'link');
   });
 
   // ---- 8. Sort: most-recently-read first, never-read last ----
-  // Hidden rows (the one currently in featured) sort to the very top so
-  // they end up at the front of the DOM, then we keep them out of sight
-  // via .shelf-row--hidden. This keeps DOM order stable for screen readers.
   rows.sort(function (a, b) {
-    var aHidden = a.classList.contains('shelf-row--hidden');
-    var bHidden = b.classList.contains('shelf-row--hidden');
-    if (aHidden !== bHidden) return aHidden ? -1 : 1;
-    var ea = state[a.getAttribute('data-book-id')] || {};
-    var eb = state[b.getAttribute('data-book-id')] || {};
+    var ea = entryForBook(a.getAttribute('data-book-id')) || {};
+    var eb = entryForBook(b.getAttribute('data-book-id')) || {};
     return (eb.lastReadAt || 0) - (ea.lastReadAt || 0);
   });
   rows.forEach(function (c) { gallery.appendChild(c); });

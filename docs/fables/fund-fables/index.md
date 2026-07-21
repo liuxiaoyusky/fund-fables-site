@@ -17,10 +17,10 @@ hide:
     <a class="library-button library-button--primary" data-role="book-continue" href="01-证券投资基金概述/01-证券投资基金简介/01-证券投资基金概念/">从第一篇开始</a>
     <a class="library-button library-button--ghost" href="../../">返回书架</a>
     <a class="library-button library-button--download" href="../../downloads/fund-fables/fund-fables-book.pdf" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 PDF
+      下载 PDF
     </a>
     <a class="library-button library-button--download" href="../../downloads/fund-fables/fund-fables-book.docx" download>
-      <span class="library-button__icon" aria-hidden="true">↓</span> 下载 Word
+      下载 Word
     </a>
   </div>
 
